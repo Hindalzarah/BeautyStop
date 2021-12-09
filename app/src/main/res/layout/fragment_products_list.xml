@@ -8,6 +8,7 @@
     tools:context=".view.ProductsListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productslist_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#EAEAEA"

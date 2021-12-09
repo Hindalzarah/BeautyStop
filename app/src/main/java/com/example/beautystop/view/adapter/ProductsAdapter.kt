@@ -1,19 +1,23 @@
 package com.example.beautystop.view.adapter
 
+import android.content.Context
+import android.content.Intent
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.example.beautystop.R
-
 import com.example.beautystop.databinding.ProductsItemLayoutBinding
+
 import com.example.beautystop.models.MakeupModel
+import com.example.beautystop.view.DetailsFragment
 import com.squareup.picasso.Picasso
 
-class ProductsAdapter(private val list: List<MakeupModel>) :
+class ProductsAdapter() :
     RecyclerView.Adapter<ProductsAdapter.ProductsHolder>() {
 
 
@@ -61,6 +65,18 @@ class ProductsAdapter(private val list: List<MakeupModel>) :
                 fun bind(item: MakeupModel) {
 
                     Picasso.get().load(item.imageLink).into(binding.imageView)
+
+                    binding.imageView.setOnClickListener(){
+
+
+                        Navigation.createNavigateOnClickListener(R.id.action_productsListFragment_to_detailsFragment)
+
+                        val intent = Intent()
+
+                        intent.putExtra("Image", "${binding.imageView}")
+
+
+                    }
                 }
         }
 

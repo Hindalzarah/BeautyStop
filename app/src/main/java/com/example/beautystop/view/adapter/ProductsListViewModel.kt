@@ -20,12 +20,12 @@ class ProductsListViewModel : ViewModel()  {
 
 
 
-    fun callMakeupProducts(){
+    fun callMakeupProducts(type: String){
         viewModelScope.launch(Dispatchers.IO) {
             //trying to get the response from the api
             try{
                 //call the api method to get the api response
-                val response = apiRepo.getPhotos()
+                val response = apiRepo.getPhotos(type)
                 //checking if the response is gotten and is successful
                 if (response.isSuccessful){
                     Log.d(TAG, this.toString())

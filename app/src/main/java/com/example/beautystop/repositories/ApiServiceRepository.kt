@@ -15,8 +15,8 @@ class ApiServiceRepository(val context: Context)  {
         .build()
     private val retrofitApi = retrofitService.create(MakeupApi::class.java)
 
-    suspend fun getPhotos() =
-        retrofitApi.getProducts()
+    suspend fun getPhotos(product_type: String) =
+        retrofitApi.getProducts(product_type)
 
 
 
