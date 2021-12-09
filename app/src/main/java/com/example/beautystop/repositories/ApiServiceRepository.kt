@@ -1,12 +1,13 @@
 package com.example.beautystop.repositories
 
+import android.content.Context
 import com.example.beautystop.api.MakeupApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
 private const val BASE_URL = "http://makeup-api.herokuapp.com"
-class ApiServiceRepository {
+class ApiServiceRepository(val context: Context)  {
 
     private val retrofitService = Retrofit.Builder()
         .baseUrl(BASE_URL)
@@ -24,9 +25,9 @@ class ApiServiceRepository {
     companion object {
         private var instance: ApiServiceRepository? = null
 
-        fun init() {
+        fun init(context: Context) {
             if (instance == null)
-                instance = ApiServiceRepository()
+                instance = ApiServiceRepository(context)
         }
 
         fun get(): ApiServiceRepository {
