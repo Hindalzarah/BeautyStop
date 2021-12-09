@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "468949684667",
+    "project_id": "beauty-stop-capstone",
+    "storage_bucket": "beauty-stop-capstone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468949684667:android:c461926b921f84c54cf49e",
+        "android_client_info": {
+          "package_name": "com.example.beautystop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468949684667-ua8j5lmj89egmbdnj90ua1g1ucul8ksq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC24ALFlaDEOYCfL8_GWc9OscfYzcbjpc4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468949684667-ua8j5lmj89egmbdnj90ua1g1ucul8ksq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/categoryMainFragment">
+
+    <fragment
+        android:id="@+id/categoryMainFragment"
+        android:name="com.example.beautystop.view.CategoryMainFragment"
+        android:label="fragment_category_main"
+        tools:layout="@layout/fragment_category_main" >
+        <action
+            android:id="@+id/action_categoryMainFragment_to_productsListFragment"
+            app:destination="@id/productsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.beautystop.view.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.beautystop.view.WishlistFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_wishlist" />
+    <fragment
+        android:id="@+id/productsListFragment"
+        android:name="com.example.beautystop.view.ProductsListFragment"
+        android:label="fragment_products_list"
+        tools:layout="@layout/fragment_products_list" >
+        <action
+            android:id="@+id/action_productsListFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+</navigation>
