@@ -18,7 +18,6 @@ import com.google.android.material.tabs.TabLayout
 class ProductsListFragment : Fragment() {
 
     private lateinit var binding: FragmentProductsListBinding
-
     private val productsListViewModel: ProductsListViewModel by activityViewModels()
     private lateinit var productsListAdapter: ProductsAdapter
     override fun onCreateView(
@@ -32,7 +31,7 @@ class ProductsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         obervers()
-        productsListAdapter = ProductsAdapter()
+        productsListAdapter = ProductsAdapter(productsListViewModel)
         binding.productslistRecyclerview.adapter = productsListAdapter
 
 
@@ -52,12 +51,7 @@ class ProductsListFragment : Fragment() {
                 "Lips" -> productsListViewModel.callMakeupProducts("lipstick")
             }
 
-
-
         }
-
-
-
 
     }
 

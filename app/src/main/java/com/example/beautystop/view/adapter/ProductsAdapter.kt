@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import com.example.beautystop.R
@@ -17,8 +19,9 @@ import com.example.beautystop.models.MakeupModel
 import com.example.beautystop.view.DetailsFragment
 import com.squareup.picasso.Picasso
 
-class ProductsAdapter() :
+class ProductsAdapter(val productViewModel: ProductsListViewModel) :
     RecyclerView.Adapter<ProductsAdapter.ProductsHolder>() {
+
 
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MakeupModel>() {
@@ -38,47 +41,50 @@ class ProductsAdapter() :
     }
 
 
-        override fun onCreateViewHolder(
-            parent: ViewGroup,
-            viewType: Int,
-        ): ProductsAdapter.ProductsHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ProductsAdapter.ProductsHolder {
 
-            val binding = ProductsItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-            return ProductsAdapter.ProductsHolder(binding)
+        val binding = ProductsItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return ProductsAdapter.ProductsHolder(binding)
 
+    }
+
+    override fun onBindViewHolder(holder: ProductsHolder, position: Int) {
+        val item = differ.currentList[position]
+
+        holder.bind(item,productViewModel)
+
+    }
+
+    override fun getItemCount(): Int {
+        return differ.currentList.size
+    }
+
+
+    class ProductsHolder(val binding: ProductsItemLayoutBinding,) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(item: MakeupModel,  productViewModel: ProductsListViewModel) {
+
+            Picasso.get().load(item.imageLink).into(binding.imageView)
+
+            binding.imageView.setOnClickListener(){
+
+
+
+
+
+                productViewModel.selectItem.postValue(item)
+                it.findNavController().navigate(R.id.action_productsListFragment_to_detailsFragment)
+
+
+
+
+
+            }
         }
-
-        override fun onBindViewHolder(holder: ProductsHolder, position: Int) {
-            val item = differ.currentList[position]
-
-            holder.bind(item)
-
-        }
-
-        override fun getItemCount(): Int {
-            return differ.currentList.size
-        }
-
-
-            class ProductsHolder(val binding: ProductsItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-
-                fun bind(item: MakeupModel) {
-
-                    Picasso.get().load(item.imageLink).into(binding.imageView)
-
-                    binding.imageView.setOnClickListener(){
-
-
-                        Navigation.createNavigateOnClickListener(R.id.action_productsListFragment_to_detailsFragment)
-
-                        val intent = Intent()
-
-                        intent.putExtra("Image", "${binding.imageView}")
-
-
-                    }
-                }
-        }
+    }
 
 
 

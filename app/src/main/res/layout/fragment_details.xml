@@ -167,14 +167,16 @@
                 style="@style/details_texts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="50dp"
                 android:text="@string/buy_from_website" />
 
-            <TextView
+            <ImageButton
                 android:id="@+id/website"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:backgroundTint="#03FFFFFF"
+                android:src="@drawable/ic_baseline_link_24"
                 android:text="TextView" />
         </LinearLayout>
 

@@ -2,18 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.beautystop">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-
-
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BeautyStop">
+        android:theme="@style/Theme.BeautyStop"
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".view.identity.RegisterActivity"
+            android:name=".view.adapter.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,12 +22,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".view.identity.RegisterActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
             android:name=".view.identity.LoginActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".view.MainActivity"
             android:exported="true" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>

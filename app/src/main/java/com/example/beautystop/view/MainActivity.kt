@@ -26,7 +26,8 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
 
-//        setupActionBarWithNavController(navController)
+        //the back button on the action bar
+        setupActionBarWithNavController(navController)
         NavigationUI.setupWithNavController(binding.buttomNavigation,navController)
     }
 

@@ -5,29 +5,35 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.beautystop.models.MakeupModel
+import com.example.beautystop.models.WishlistModel
 import com.example.beautystop.repositories.ApiServiceRepository
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.math.log
 
 private const val TAG = "ProductsListViewModel"
-class ProductsListViewModel : ViewModel()  {
+
+class ProductsListViewModel : ViewModel() {
 
     private val apiRepo = ApiServiceRepository.get()
 
+    val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
     val makeupProductsLiveData = MutableLiveData<List<MakeupModel>>()
     val makeupProductsErrorLiveData = MutableLiveData<String>()
 
+    //for when a specific item is selected to display the details fragment
+    val selectItem = MutableLiveData<MakeupModel>()
 
 
-    fun callMakeupProducts(type: String){
+    fun callMakeupProducts(type: String) {
         viewModelScope.launch(Dispatchers.IO) {
             //trying to get the response from the api
-            try{
+            try {
                 //call the api method to get the api response
                 val response = apiRepo.getPhotos(type)
                 //checking if the response is gotten and is successful
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     Log.d(TAG, this.toString())
 
                     //using the livedata to pass the response to the view
@@ -36,17 +42,31 @@ class ProductsListViewModel : ViewModel()  {
                     }
 
 
-
-                }else{
-                    Log.d(TAG,response.message())
+                } else {
+                    Log.d(TAG, response.message())
                     makeupProductsErrorLiveData.postValue(response.message())
-            }
-        } catch (e: Exception){
-            Log.d(TAG,e.message.toString())
+                }
+            } catch (e: Exception) {
+                Log.d(TAG, e.message.toString())
                 makeupProductsErrorLiveData.postValue(e.message.toString())
-        }
+            }
         }
 
 
+    }
+
+
+    fun addToWishlist(wishlistBody: MakeupModel){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+
+                val response = apiRepo.addToWishlist(WishlistModel(wishlistBody.imageLink!!,wishlistBody.name!!,1,"",userId))
+
+            } catch (e: Exception) {
+
+                    Log.d(TAG, e.message.toString())
+                    makeupProductsErrorLiveData.postValue(e.message.toString())
+            }
+        }
     }
 }
