@@ -9,7 +9,7 @@ data class WishlistModel(
     @SerializedName("name")
     val name: String,
     @SerializedName("quantity")
-    val quantity: Int,
+    var quantity: Int,
     @SerializedName("id")
     val id: String,
     @SerializedName("userId")

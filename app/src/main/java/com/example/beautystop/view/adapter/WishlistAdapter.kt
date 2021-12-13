@@ -11,7 +11,9 @@ import com.example.beautystop.view.WishlistViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 
+
 class WishlistAdapter(val viewModel: WishlistViewModel) :
+
     RecyclerView.Adapter<WishlistAdapter.FavoritesHolder>() {
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<WishlistModel>() {
@@ -50,6 +52,18 @@ class WishlistAdapter(val viewModel: WishlistViewModel) :
 
         holder.bind(item)
 
+        holder.delete.setOnClickListener {
+
+            val wishlist = mutableListOf<WishlistModel>()
+            wishlist.addAll(differ.currentList)
+            wishlist.remove(item)
+
+            viewModel.deleteFromWishlist(item.id)
+
+            differ.submitList(wishlist)
+
+        }
+
 
     }
 
@@ -59,23 +73,27 @@ class WishlistAdapter(val viewModel: WishlistViewModel) :
 
     class FavoritesHolder(val binding: WishlistItemLayoutBinding,val viewModel: WishlistViewModel) : RecyclerView.ViewHolder(binding.root) {
 
+        val delete = binding.deleteButton
         fun bind(item: WishlistModel) {
 
             var counter = 1
-            binding.deleteButton.setOnClickListener {
-
-                    viewModel.deleteFromWishlist(item.id)
-
-            }
             binding.plusButton.setOnClickListener {
 
                 counter++
                 binding.amountTextview.text = counter.toString()
+
+                item.quantity = counter
+
+                viewModel.editFromWishlist(item)
             }
             binding.minusButton.setOnClickListener {
                 if(counter > 0) {
                     counter--
                     binding.amountTextview.text = counter.toString()
+
+                    item.quantity = counter
+
+                    viewModel.editFromWishlist(item)
                 }
             }
 
