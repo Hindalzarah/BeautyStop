@@ -19,10 +19,10 @@ class ApiServiceRepository(val context: Context)  {
     suspend fun getPhotos(product_type: String) =
         retrofitApi.getProducts(product_type)
 
-    suspend fun getWishlist(id:String) = retrofitApi.getWishlist()
-    suspend fun addToWishlist(wishlistBody:WishlistModel) = retrofitApi.addToWishlist(wishlistBody)
-    suspend fun deleteFromWishlist(id:String) = retrofitApi.deleteFromWishlist(id)
-    suspend fun editWishlist(id:String,wishlistBody: WishlistModel) = retrofitApi.editWishlist(id,wishlistBody)
+//    suspend fun getWishlist(id:String) = retrofitApi.getWishlist()
+//    suspend fun addToWishlist(wishlistBody:WishlistModel) = retrofitApi.addToWishlist(wishlistBody)
+//    suspend fun deleteFromWishlist(id:String) = retrofitApi.deleteFromWishlist(id)
+//    suspend fun editWishlist(id:String,wishlistBody: WishlistModel) = retrofitApi.editWishlist(id,wishlistBody)
 
 
     // to initialize and get the repository we use the companion object

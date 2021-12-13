@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.beautystop.databinding.WishlistItemLayoutBinding
 import com.example.beautystop.models.WishlistModel
 import com.example.beautystop.view.WishlistViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 
 class WishlistAdapter(val viewModel: WishlistViewModel) :

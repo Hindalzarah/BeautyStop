@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.beautystop.models.MakeupModel
 import com.example.beautystop.models.WishlistModel
 import com.example.beautystop.repositories.ApiServiceRepository
+import com.example.beautystop.repositories.WishlistApiServiceRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,10 +18,12 @@ private const val TAG = "ProductsListViewModel"
 class ProductsListViewModel : ViewModel() {
 
     private val apiRepo = ApiServiceRepository.get()
+    private val apiWish = WishlistApiServiceRepository.get()
 
     val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
     val makeupProductsLiveData = MutableLiveData<List<MakeupModel>>()
     val makeupProductsErrorLiveData = MutableLiveData<String>()
+    val addMakeupProductsLiveData = MutableLiveData<String>()
 
     //for when a specific item is selected to display the details fragment
     val selectItem = MutableLiveData<MakeupModel>()
@@ -60,7 +63,19 @@ class ProductsListViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
 
-                val response = apiRepo.addToWishlist(WishlistModel(wishlistBody.imageLink!!,wishlistBody.name!!,1,"",userId))
+                val response = apiWish.addToWishlist(WishlistModel(wishlistBody.imageLink!!,wishlistBody.name!!,1,"",userId))
+                if (response.isSuccessful) {
+
+
+                    Log.d(TAG, this.toString())
+
+                    //using the livedata to pass the response to the view
+
+
+                } else {
+                    Log.d(TAG, response.message())
+                    makeupProductsErrorLiveData.postValue(response.message())
+                }
 
             } catch (e: Exception) {
 

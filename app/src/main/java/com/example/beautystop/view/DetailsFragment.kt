@@ -25,11 +25,17 @@ import android.widget.Toast
 
 import android.content.ActivityNotFoundException
 import android.net.Uri
+import com.example.beautystop.models.WishlistModel
+import okhttp3.internal.userAgent
 
 
-class DetailsFragment : Fragment() {
+class DetailsFragment() : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
+    private lateinit var makeupModel: MakeupModel
     val productViewModel: ProductsListViewModel by activityViewModels()
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -65,8 +71,26 @@ class DetailsFragment : Fragment() {
             }
 
 
+            makeupModel = value
         })
 
 
+
+        binding.favoriteToggleButton.setOnClickListener {
+
+            if(binding.favoriteToggleButton.isChecked){
+                productViewModel.addToWishlist(makeupModel)
+            }
+        }
+
     }
+//    fun MakeupModel.toWishlistModel()=WishlistModel(
+//
+//        image = imageLink.toString(),
+//        id = id.toString(),
+//        name = name.toString(),
+//        quantity =
+//    )
+
+
 }

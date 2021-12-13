@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.example.beautystop.R
 import com.example.beautystop.databinding.FragmentDetailsBinding
 import com.example.beautystop.databinding.FragmentWishlistBinding
@@ -15,6 +18,7 @@ class WishlistFragment : Fragment() {
 
     private lateinit var binding: FragmentWishlistBinding
     private lateinit var wishlistAdapter: WishlistAdapter
+    val wishlistViewModel: WishlistViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -26,12 +30,14 @@ class WishlistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observrs()
 
-        wishlistAdapter = WishlistAdapter()
+        wishlistAdapter = WishlistAdapter(wishlistViewModel)
 
         binding.wishlistRecyclerview.adapter = wishlistAdapter
 
 
+        wishlistViewModel.callWishlist()
 
 
 
@@ -41,6 +47,17 @@ class WishlistFragment : Fragment() {
 
     fun observrs() {
 
+        wishlistViewModel.wishlistLiveData.observe(viewLifecycleOwner, Observer {
+            wishlistAdapter.submitList(it)
+
+
+        })
+
+        wishlistViewModel.wishlistErrorLiveData.observe(viewLifecycleOwner, Observer {
+            it?.let{
+                Toast.makeText(requireActivity(), "$it wish", Toast.LENGTH_SHORT).show()
+            }
+        })
 
     }
 }

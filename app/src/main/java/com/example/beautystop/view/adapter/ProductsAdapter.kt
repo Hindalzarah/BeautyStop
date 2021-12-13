@@ -72,9 +72,6 @@ class ProductsAdapter(val productViewModel: ProductsListViewModel) :
             binding.imageView.setOnClickListener(){
 
 
-
-
-
                 productViewModel.selectItem.postValue(item)
                 it.findNavController().navigate(R.id.action_productsListFragment_to_detailsFragment)
 

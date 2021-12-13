@@ -13,5 +13,6 @@ data class WishlistModel(
     @SerializedName("id")
     val id: String,
     @SerializedName("userId")
-    val userId: String
+    val userId: String,
+
 )
