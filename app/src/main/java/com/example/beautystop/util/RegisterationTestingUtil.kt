@@ -7,7 +7,7 @@ class RegisterationTestingUtil {
 
 
 
-        private val existingUsers = listOf("Lama", "Hind")
+        private val existingUsers = listOf("Lama", "Hind","Phillip")
 
         /**
          * the input is not valid if...

@@ -50,7 +50,7 @@ val registerationTestingUtil = RegisterationTestingUtil()
     @Test
     fun `incorrectly confirmed password returns false`() {
         val result = registerationTestingUtil.validateRegistrationInput(
-            "Philipp",
+            "Hind",
             "123456",
             "abcdefg"
         )
@@ -62,7 +62,7 @@ val registerationTestingUtil = RegisterationTestingUtil()
     @Test
     fun `empty password returns false`() {
         val result = registerationTestingUtil.validateRegistrationInput(
-            "Philipp",
+            "Hind",
             "",
             ""
         )
@@ -74,7 +74,7 @@ val registerationTestingUtil = RegisterationTestingUtil()
     @Test
     fun `less than 2 digit password returns false`() {
         val result = registerationTestingUtil.validateRegistrationInput(
-            "Philipp",
+            "Hind",
             "abcdefg5",
             "abcdefg5"
         )
