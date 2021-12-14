@@ -1,17 +1,15 @@
-package com.example.beautystop.view.identity
+package com.example.beautystop.view
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.example.beautystop.R
-import com.example.beautystop.view.MainActivity
 
 import com.google.firebase.auth.FirebaseAuth
 
@@ -20,6 +18,7 @@ private lateinit var sharedPref: SharedPreferences
 private lateinit var sharedPrefEditor: SharedPreferences.Editor
 var SHARED_PREF_FILE = "preference"
 private const val TAG = "LoginActivity"
+
 class LoginActivity : AppCompatActivity() {
 
 
@@ -38,10 +37,11 @@ class LoginActivity : AppCompatActivity() {
         }
 
         sharedPref = this.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
-        if (sharedPref.getBoolean("is Logged", false)){
+        if (sharedPref.getBoolean("is Logged", false)) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            finish() }
+            finish()
+        }
 
         loginButton.setOnClickListener {
             val email: String = emailAdress.text.toString()
@@ -57,7 +57,8 @@ class LoginActivity : AppCompatActivity() {
                             val intent = Intent(this, MainActivity::class.java)
                             intent.putExtra("UserId", FirebaseAuth.getInstance().currentUser!!.uid)
                             intent.putExtra("Email", FirebaseAuth.getInstance().currentUser!!.email)
-                            sharedPref = this.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
+                            sharedPref =
+                                this.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
                             sharedPrefEditor = sharedPref.edit()
                             sharedPrefEditor.putBoolean("isLogged?", true)
                             sharedPrefEditor.commit()
@@ -72,5 +73,5 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        }
     }
+}

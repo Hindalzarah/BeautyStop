@@ -1,4 +1,4 @@
-package com.example.beautystop.view.adapter
+package com.example.beautystop.view
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

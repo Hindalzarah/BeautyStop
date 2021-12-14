@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.BeautyStop" parent="Theme.MaterialComponents.Light">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#F8E6DB</item>
-        <item name="colorPrimaryVariant">#F8E6DB</item>
+        <item name="colorPrimary">#CCCCCC</item>
+        <item name="colorPrimaryVariant">#CCCCCC</item>
         <item name="colorOnPrimary">#F7F7F7</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -38,5 +38,11 @@
         <item name="cornerSize">50%</item>
     </style>
 
+
+    <style name="AppTheme.Splash" parent="@style/Theme.AppCompat.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="background">@color/white</item>
+    </style>
 
 </resources>

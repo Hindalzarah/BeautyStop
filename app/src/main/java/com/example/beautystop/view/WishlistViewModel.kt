@@ -31,22 +31,29 @@ class WishlistViewModel: ViewModel() {
     fun callWishlist() {
         viewModelScope.launch(Dispatchers.IO) {
 
+            //sending request and trying to get a response
             try {
                 Log.d(TAG,"in try")
+
+                //we need the user id to get the wishlist so we get the user id from the firebase
                 val response = apiRepo.getWishlist(FirebaseAuth.getInstance().currentUser!!.uid)
+                //if sucessful
                 if (response.isSuccessful) {
                     Log.d(TAG,"in if condition")
                     Log.d(TAG,response.toString())
 
                     response.body()?.run {
+                        //submitting the response in the livedata
                         wishlistLiveData.postValue(this)
                         Log.d(TAG,this.toString())
                     }
                 } else {
+                    //if unsuccessful
                     Log.d(TAG,response.toString())
                     Log.d(TAG,"in else condition")
 
                     Log.d(TAG,response.message())
+                    //submitting the response in the error livedata
                     wishlistErrorLiveData.postValue(response.message())
                 }
 
@@ -90,7 +97,7 @@ class WishlistViewModel: ViewModel() {
 
         viewModelScope.launch (Dispatchers.IO){
 
-
+            Log.d(TAG,wishlistBody.toString())
             try{
                 val response = apiRepo.editWishlist(wishlistBody.id,wishlistBody)
                 if (response.isSuccessful) {

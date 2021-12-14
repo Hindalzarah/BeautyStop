@@ -12,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.beautystop.R
 import com.example.beautystop.databinding.FragmentCategoryMainBinding
 import com.example.beautystop.databinding.FragmentProductsListBinding
-import com.example.beautystop.view.identity.LoginActivity
-import com.example.beautystop.view.identity.SHARED_PREF_FILE
+//import com.example.beautystop.view.identity.LoginActivity
+//import com.example.beautystop.view.identity.SHARED_PREF_FILE
 import com.google.firebase.auth.FirebaseAuth
 
 class CategoryMainFragment : Fragment() {

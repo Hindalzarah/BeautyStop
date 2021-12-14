@@ -3,6 +3,7 @@ package com.example.beautystop.repositories
 import android.content.Context
 import com.example.beautystop.api.MakeupApi
 import com.example.beautystop.models.WishlistModel
+import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -20,7 +21,7 @@ class WishlistApiServiceRepository(val context: Context)  {
 
 
 
-    suspend fun getWishlist(id:String) = retrofitApi.getWishlist()
+    suspend fun getWishlist(id:String) = retrofitApi.getWishlist(FirebaseAuth.getInstance().currentUser!!.uid)
     suspend fun addToWishlist(wishlistBody: WishlistModel) = retrofitApi.addToWishlist(wishlistBody)
     suspend fun deleteFromWishlist(id:String) = retrofitApi.deleteFromWishlist(id)
     suspend fun editWishlist(id:String,wishlistBody: WishlistModel) = retrofitApi.editWishlist(id,wishlistBody)

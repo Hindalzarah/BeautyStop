@@ -1,4 +1,4 @@
-package com.example.beautystop.view.adapter
+package com.example.beautystop.view
 
 import android.content.Context
 import android.content.Intent
@@ -8,9 +8,8 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import com.example.beautystop.R
-import com.example.beautystop.view.MainActivity
-import com.example.beautystop.view.identity.LoginActivity
-import com.example.beautystop.view.identity.SHARED_PREF_FILE
+//import com.example.beautystop.view.identity.LoginActivity
+//import com.example.beautystop.view.identity.SHARED_PREF_FILE
 
 class SplashActivity : AppCompatActivity() {
 

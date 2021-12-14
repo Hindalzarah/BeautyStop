@@ -10,4 +10,5 @@
     <color name="background">#EAEAEA</color>
     <color name="hint_color">#8A8282</color>
     <color name="header_textcolor">#AD988E71</color>
+    <color name="bottom_bar">#CCCCCC</color>
 </resources>

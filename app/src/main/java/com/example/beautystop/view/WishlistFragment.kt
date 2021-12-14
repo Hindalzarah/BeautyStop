@@ -8,10 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import com.example.beautystop.R
-import com.example.beautystop.databinding.FragmentDetailsBinding
 import com.example.beautystop.databinding.FragmentWishlistBinding
-import com.example.beautystop.view.adapter.ProductsAdapter
 import com.example.beautystop.view.adapter.WishlistAdapter
 
 class WishlistFragment : Fragment() {
@@ -50,7 +47,7 @@ class WishlistFragment : Fragment() {
         wishlistViewModel.wishlistLiveData.observe(viewLifecycleOwner, Observer {
             wishlistAdapter.submitList(it)
 
-
+            binding.favoritesProgressBar.animate().alpha(0f)
         })
 
         wishlistViewModel.wishlistErrorLiveData.observe(viewLifecycleOwner, Observer {

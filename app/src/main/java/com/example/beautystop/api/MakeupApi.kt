@@ -18,7 +18,7 @@ interface MakeupApi {
 
 
     @GET("/wishlist")
-    suspend fun getWishlist(): Response<List<WishlistModel>>
+    suspend fun getWishlist(@Query ("userId") userId: String): Response<List<WishlistModel>>
 
     //to add products to the wishlist fragment
     @POST("/wishlist")

@@ -1,4 +1,4 @@
-package com.example.beautystop.view.identity
+package com.example.beautystop.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.example.beautystop.R
-import com.example.beautystop.view.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 

@@ -1,40 +1,34 @@
 package com.example.beautystop.view.adapter
 
 import android.content.Context
-import android.content.Intent
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import com.bumptech.glide.Glide
 import com.example.beautystop.R
 import com.example.beautystop.databinding.ProductsItemLayoutBinding
-
 import com.example.beautystop.models.MakeupModel
-import com.example.beautystop.view.DetailsFragment
-import com.squareup.picasso.Picasso
+import com.example.beautystop.view.ProductsListViewModel
 
-class ProductsAdapter(val productViewModel: ProductsListViewModel) :
+class ProductsAdapter(val productViewModel: ProductsListViewModel, val context: Context) :
     RecyclerView.Adapter<ProductsAdapter.ProductsHolder>() {
-
 
 
     val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MakeupModel>() {
         override fun areItemsTheSame(oldItem: MakeupModel, newItem: MakeupModel): Boolean {
             return oldItem.id == newItem.id
         }
+
         override fun areContentsTheSame(oldItem: MakeupModel, newItem: MakeupModel): Boolean {
             return oldItem == newItem
         }
 
     }
 
-    private val differ = AsyncListDiffer(this,DIFF_CALLBACK)
+    private val differ = AsyncListDiffer(this, DIFF_CALLBACK)
 
     fun submitList(list: List<MakeupModel>) {
         differ.submitList(list)
@@ -46,15 +40,16 @@ class ProductsAdapter(val productViewModel: ProductsListViewModel) :
         viewType: Int,
     ): ProductsAdapter.ProductsHolder {
 
-        val binding = ProductsItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return ProductsAdapter.ProductsHolder(binding)
+        val binding =
+            ProductsItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ProductsAdapter.ProductsHolder(binding, context)
 
     }
 
     override fun onBindViewHolder(holder: ProductsHolder, position: Int) {
         val item = differ.currentList[position]
 
-        holder.bind(item,productViewModel)
+        holder.bind(item, productViewModel)
 
     }
 
@@ -63,27 +58,28 @@ class ProductsAdapter(val productViewModel: ProductsListViewModel) :
     }
 
 
-    class ProductsHolder(val binding: ProductsItemLayoutBinding,) : RecyclerView.ViewHolder(binding.root) {
+    class ProductsHolder(val binding: ProductsItemLayoutBinding, val context: Context) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: MakeupModel,  productViewModel: ProductsListViewModel) {
+        fun bind(item: MakeupModel, productViewModel: ProductsListViewModel) {
 
-            Picasso.get().load(item.imageLink).into(binding.imageView)
+            Glide.with(context).load(item.imageLink).placeholder(R.drawable.splash)
+                .into(binding.imageView)
 
-            binding.imageView.setOnClickListener(){
+//               Glide.with(itemView).load(item.imageLink).diskCacheStrategy(
+//                DiskCacheStrategy.ALL).into(binding.imageView)
+
+
+            binding.imageView.setOnClickListener() {
 
 
                 productViewModel.selectItem.postValue(item)
                 it.findNavController().navigate(R.id.action_productsListFragment_to_detailsFragment)
 
 
-
-
-
             }
         }
     }
-
-
 
 
 }

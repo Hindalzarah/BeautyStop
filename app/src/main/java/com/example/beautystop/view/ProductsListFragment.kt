@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.beautystop.R
 import com.example.beautystop.databinding.FragmentProductsListBinding
 import com.example.beautystop.view.adapter.ProductsAdapter
-import com.example.beautystop.view.adapter.ProductsListViewModel
+
 import com.google.android.material.tabs.TabLayout
 
 
@@ -31,11 +31,13 @@ class ProductsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         obervers()
-        productsListAdapter = ProductsAdapter(productsListViewModel)
+        productsListAdapter = ProductsAdapter(productsListViewModel,requireContext())
         binding.productslistRecyclerview.adapter = productsListAdapter
 
 
         Log.d("productlistFragment","`test")
+
+
 
         //getting the data from bundle
         val product_type = arguments?.getString("Type")
@@ -59,7 +61,12 @@ class ProductsListFragment : Fragment() {
 
     fun obervers(){
         productsListViewModel.makeupProductsLiveData.observe(viewLifecycleOwner,{
-           productsListAdapter.submitList(it)
+            it?.let {
+                productsListAdapter.submitList(it)
+                binding.listProgressBar.animate().alpha(0f)
+                productsListViewModel.makeupProductsLiveData.postValue(null)
+            }
+
         })
 
         productsListViewModel.makeupProductsErrorLiveData.observe(viewLifecycleOwner, {

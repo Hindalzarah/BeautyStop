@@ -7,26 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-
-import com.example.beautystop.databinding.FragmentCategoryMainBinding
 import com.example.beautystop.databinding.FragmentDetailsBinding
-import com.example.beautystop.databinding.FragmentProductsListBinding
 import com.example.beautystop.models.MakeupModel
-import com.example.beautystop.view.adapter.ProductsListViewModel
 import com.squareup.picasso.Picasso
-import android.text.method.LinkMovementMethod
-
-import android.R
-
-import android.widget.TextView
 import android.widget.Toast
-
 import android.content.ActivityNotFoundException
 import android.net.Uri
-import com.example.beautystop.models.WishlistModel
-import okhttp3.internal.userAgent
+
 
 
 class DetailsFragment() : Fragment() {
@@ -74,8 +62,6 @@ class DetailsFragment() : Fragment() {
             makeupModel = value
         })
 
-
-
         binding.favoriteToggleButton.setOnClickListener {
 
             if(binding.favoriteToggleButton.isChecked){
@@ -84,13 +70,4 @@ class DetailsFragment() : Fragment() {
         }
 
     }
-//    fun MakeupModel.toWishlistModel()=WishlistModel(
-//
-//        image = imageLink.toString(),
-//        id = id.toString(),
-//        name = name.toString(),
-//        quantity =
-//    )
-
-
 }

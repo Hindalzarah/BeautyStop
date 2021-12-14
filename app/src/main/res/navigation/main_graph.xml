@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/categoryMainFragment"
         android:name="com.example.beautystop.view.CategoryMainFragment"
-        android:label="fragment_category_main"
-        tools:layout="@layout/fragment_category_main" >
+        android:label="Categories"
+        tools:layout="@layout/fragment_category_main">
         <action
             android:id="@+id/action_categoryMainFragment_to_productsListFragment"
             app:destination="@id/productsListFragment" />
@@ -17,18 +17,18 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.beautystop.view.DetailsFragment"
-        android:label="fragment_details"
+        android:label="details"
         tools:layout="@layout/fragment_details" />
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.beautystop.view.WishlistFragment"
-        android:label="fragment_favorites"
+        android:label="Favorites"
         tools:layout="@layout/fragment_wishlist" />
     <fragment
         android:id="@+id/productsListFragment"
         android:name="com.example.beautystop.view.ProductsListFragment"
-        android:label="fragment_products_list"
-        tools:layout="@layout/fragment_products_list" >
+        android:label="products"
+        tools:layout="@layout/fragment_products_list">
         <action
             android:id="@+id/action_productsListFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
