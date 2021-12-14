@@ -15,7 +15,7 @@
         <entry key="app/src/main/res/layout/favorites_item_layout.xml" value="0.22708333333333333" />
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/fragment_category_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.22121486854034453" />
+        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.3325526932084309" />
         <entry key="app/src/main/res/layout/fragment_eyes_category.xml" value="0.22708333333333333" />
         <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1984375" />
@@ -24,7 +24,7 @@
         <entry key="app/src/main/res/layout/fragment_wishlist.xml" value="0.2515911309781029" />
         <entry key="app/src/main/res/layout/products_item_layout.xml" value="0.335" />
         <entry key="app/src/main/res/layout/wishlist_item_layout.xml" value="0.335" />
-        <entry key="app/src/main/res/menu/main_menu.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.5" />
       </map>
     </option>

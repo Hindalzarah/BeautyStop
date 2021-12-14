@@ -15,8 +15,14 @@ interface MakeupApi {
         @Query("product_type")  product_type: String
     ): Response<List<MakeupModel>>
 
+    //search by specific brand
+    @GET("/api/v1/products.json")
+    suspend fun searchBrand(
+        @Query ("brand") brand: String): Response<List<MakeupModel>>
 
 
+
+    //get the products that are in the wishlist
     @GET("/wishlist")
     suspend fun getWishlist(@Query ("userId") userId: String): Response<List<WishlistModel>>
 
@@ -32,6 +38,8 @@ interface MakeupApi {
     @PUT("/wishlist/{id}")
     suspend fun editWishlist( @Path("id") Id: String,
     @Body Wishlistbody: WishlistModel  ): Response<WishlistModel>
+
+
 
 
 

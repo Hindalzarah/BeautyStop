@@ -6,12 +6,14 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.beautystop.R
 import com.example.beautystop.databinding.FragmentCategoryMainBinding
 import com.example.beautystop.databinding.FragmentProductsListBinding
+import com.example.beautystop.models.MakeupModel
 //import com.example.beautystop.view.identity.LoginActivity
 //import com.example.beautystop.view.identity.SHARED_PREF_FILE
 import com.google.firebase.auth.FirebaseAuth
@@ -20,6 +22,7 @@ class CategoryMainFragment : Fragment() {
 
     private lateinit var sharedPref: SharedPreferences
     private lateinit var sharedPrefEditor: SharedPreferences.Editor
+    var allProducts = listOf<MakeupModel>()
     private lateinit var binding: FragmentCategoryMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +85,11 @@ class CategoryMainFragment : Fragment() {
             startActivity(intent)
 
                 true
+
         }
+
+
+
 
     }
 

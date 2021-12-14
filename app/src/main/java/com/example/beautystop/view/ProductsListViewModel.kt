@@ -59,11 +59,15 @@ class ProductsListViewModel : ViewModel() {
     }
 
 
-    fun addToWishlist(wishlistBody: MakeupModel){
+    fun addToWishlist(wishlistBody: MakeupModel) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
 
-                val response = apiWish.addToWishlist(WishlistModel(wishlistBody.imageLink!!,wishlistBody.name!!,1,"",userId))
+                val response = apiWish.addToWishlist(WishlistModel(wishlistBody.imageLink!!,
+                    wishlistBody.name!!,
+                    1,
+                    "",
+                    userId))
                 if (response.isSuccessful) {
 
 
@@ -79,8 +83,27 @@ class ProductsListViewModel : ViewModel() {
 
             } catch (e: Exception) {
 
-                    Log.d(TAG, e.message.toString())
-                    makeupProductsErrorLiveData.postValue(e.message.toString())
+                Log.d(TAG, e.message.toString())
+                makeupProductsErrorLiveData.postValue(e.message.toString())
+            }
+        }
+    }
+
+    fun searchBrand(brand: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = apiRepo.searchBrand(brand)
+                if (response.isSuccessful) {
+                    Log.d(TAG, this.toString())
+                } else{
+                    Log.d(TAG, response.message())
+                    makeupProductsErrorLiveData.postValue(response.message())
+                }
+            } catch (e: Exception) {
+
+                Log.d(TAG, e.message.toString())
+                makeupProductsErrorLiveData.postValue(e.message.toString())
+
             }
         }
     }

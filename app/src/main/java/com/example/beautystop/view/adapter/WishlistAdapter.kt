@@ -43,7 +43,7 @@ class WishlistAdapter(val viewModel: WishlistViewModel) :
 
 
         val binding = WishlistItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return FavoritesHolder(binding,viewModel)
+        return FavoritesHolder(binding)
 
 
     }
@@ -81,9 +81,12 @@ class WishlistAdapter(val viewModel: WishlistViewModel) :
 
 
         holder.minus.setOnClickListener{
-            counter--
-            holder.amount.text = counter.toString()
+            if(item.quantity > 0) {
 
+
+                counter--
+                holder.amount.text = counter.toString()
+            }
             //update function to update the quantity in the list
             item.quantity = counter
             viewModel.editFromWishlist(item)
@@ -95,7 +98,7 @@ class WishlistAdapter(val viewModel: WishlistViewModel) :
         return differ.currentList.size
     }
 
-    class FavoritesHolder(val binding: WishlistItemLayoutBinding,val viewModel: WishlistViewModel) : RecyclerView.ViewHolder(binding.root) {
+    class FavoritesHolder(val binding: WishlistItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
 
         val delete = binding.deleteButton
         val plus = binding.plusButton
@@ -109,25 +112,6 @@ class WishlistAdapter(val viewModel: WishlistViewModel) :
             binding.productNameWishlistTv.text = item.name
             binding.amountTextview.text = item.quantity.toString()
 
-//            var counter = 1
-//            binding.plusButton.setOnClickListener {
-//
-//                counter++
-//                binding.amountTextview.text = counter.toString()
-//
-//                //update function to update the quantity in the list
-//                item.quantity = counter
-//                viewModel.editFromWishlist(item)
-//            }
-//            binding.minusButton.setOnClickListener {
-//                if(counter > 0) {
-//                    counter--
-//                    binding.amountTextview.text = counter.toString()
-//
-//                    //update function to update the quantity in the list
-//                    item.quantity = counter
-//                    viewModel.editFromWishlist(item)
-//                }
             }
 
 

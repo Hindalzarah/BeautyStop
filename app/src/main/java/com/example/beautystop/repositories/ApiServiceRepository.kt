@@ -18,6 +18,7 @@ class ApiServiceRepository(val context: Context)  {
 
     suspend fun getPhotos(product_type: String) =
         retrofitApi.getProducts(product_type)
+    suspend fun searchBrand(brand:String) = retrofitApi.searchBrand(brand)
 
 //    suspend fun getWishlist(id:String) = retrofitApi.getWishlist()
 //    suspend fun addToWishlist(wishlistBody:WishlistModel) = retrofitApi.addToWishlist(wishlistBody)

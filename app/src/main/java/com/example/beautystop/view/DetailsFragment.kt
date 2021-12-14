@@ -38,14 +38,27 @@ class DetailsFragment() : Fragment() {
 
         productViewModel.selectItem.observe(viewLifecycleOwner, Observer { value ->
             Picasso.get().load(value.imageLink).into(binding.productDetailsImageview)
-            binding.name.text = value.name
-            binding.brand.text = value.brand
-            binding.price.text = "${value.price} SAR"
+            binding.name.text = value.brand
+            binding.brand.text = value.name
+
+            if(value.price == "0.0"){
+                binding.price.text = "Not Available"
+            } else{
+
+                binding.price.text = "${value.price} USD"
+            }
+            binding.rating.text = value.rating.toString()
+            binding.colors.text = value.productColors.toString()
+            if(value.rating != null){
+                binding.rating.text = value.rating.toString()
+            } else{
+                binding.rating.text = "unrated"
+            }
 
             binding.website.setOnClickListener() {
                 try {
                     val myIntent =
-                        Intent(Intent.ACTION_VIEW, Uri.parse(value.websiteLink.toString()))
+                        Intent(Intent.ACTION_VIEW, Uri.parse(value.productLink.toString()))
                                 startActivity(myIntent)
                 } catch (e: ActivityNotFoundException) {
 

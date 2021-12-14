@@ -17,7 +17,9 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="log_out">Log out</string>
     <string name="brand">Brand</string>
-    <string name="name">Name</string>
     <string name="price">Price</string>
     <string name="buy_from_website">Buy From Website</string>
+    <string name="colors">Colors</string>
+    <string name="rating">Rating</string>
+    <string name="name">Name</string>
 </resources>
