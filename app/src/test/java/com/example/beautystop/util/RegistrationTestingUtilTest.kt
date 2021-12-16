@@ -5,15 +5,15 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
 
-class RegisterationTestingUtilTest {
+class RegistrationTestingUtilTest {
 
-val registerationTestingUtil = RegisterationTestingUtil()
+private val registrationTestingUtil = RegistrationTestingUtil()
 
     //this function makes sure that the username is not an empty string, when it is, it returns False.
     @Test
     fun `empty username returns false`(){
 
-        val result = registerationTestingUtil.validateRegistrationInput(
+        val result = registrationTestingUtil.validateRegistrationInput(
             "",
             "123",
             "123"
@@ -25,7 +25,7 @@ val registerationTestingUtil = RegisterationTestingUtil()
     //this test function checks if the username is already taken or not. if it's not taken it returns True.
     @Test
     fun `valid username and correctly repeated password returns true`() {
-        val result = registerationTestingUtil.validateRegistrationInput(
+        val result = registrationTestingUtil.validateRegistrationInput(
             "Sara",
             "123",
             "123"
@@ -37,7 +37,7 @@ val registerationTestingUtil = RegisterationTestingUtil()
 
     @Test
     fun `username already exists returns false`() {
-        val result = registerationTestingUtil.validateRegistrationInput(
+        val result = registrationTestingUtil.validateRegistrationInput(
             "Hind",
             "123",
             "123"
@@ -49,7 +49,7 @@ val registerationTestingUtil = RegisterationTestingUtil()
 
     @Test
     fun `incorrectly confirmed password returns false`() {
-        val result = registerationTestingUtil.validateRegistrationInput(
+        val result = registrationTestingUtil.validateRegistrationInput(
             "Hind",
             "123456",
             "abcdefg"
@@ -61,7 +61,7 @@ val registerationTestingUtil = RegisterationTestingUtil()
 
     @Test
     fun `empty password returns false`() {
-        val result = registerationTestingUtil.validateRegistrationInput(
+        val result = registrationTestingUtil.validateRegistrationInput(
             "Hind",
             "",
             ""
@@ -73,7 +73,7 @@ val registerationTestingUtil = RegisterationTestingUtil()
 
     @Test
     fun `less than 2 digit password returns false`() {
-        val result = registerationTestingUtil.validateRegistrationInput(
+        val result = registrationTestingUtil.validateRegistrationInput(
             "Hind",
             "abcdefg5",
             "abcdefg5"

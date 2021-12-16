@@ -34,7 +34,7 @@ class RegisterActivity : AppCompatActivity() {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             val firebaseuser: FirebaseUser = task.result!!.user!!
-                            Toast.makeText(this, "User Registered Successfully", Toast.LENGTH_SHORT)
+                            Toast.makeText(this, "Registered Successfully", Toast.LENGTH_SHORT)
                                 .show()
                             val intent = Intent(this, MainActivity::class.java)
                             intent.putExtra("UserId", firebaseuser.uid)

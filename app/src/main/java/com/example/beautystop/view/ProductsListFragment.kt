@@ -5,18 +5,25 @@ import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.beautystop.R
 import com.example.beautystop.databinding.FragmentProductsListBinding
 import com.example.beautystop.models.MakeupModel
 import com.example.beautystop.view.adapter.ProductsAdapter
 
 import com.google.android.material.tabs.TabLayout
+import java.lang.Exception
+import java.lang.NullPointerException
 
-
+private const val TAG = "ProductsListFragment"
 class ProductsListFragment : Fragment() {
 
+    private lateinit var layoutMangerr: GridLayoutManager
     private lateinit var binding: FragmentProductsListBinding
     private val productsListViewModel: ProductsListViewModel by activityViewModels()
     private lateinit var productsListAdapter: ProductsAdapter
@@ -37,8 +44,44 @@ class ProductsListFragment : Fragment() {
         binding.productslistRecyclerview.adapter = productsListAdapter
 
 
-        Log.d("productlistFragment","`test")
 
+
+        layoutMangerr = GridLayoutManager(requireContext(),3)
+        binding.productslistRecyclerview.layoutManager=layoutMangerr
+        // paging
+        var loading = true
+        var pastVisiblesItems: Int
+        var visibleItemCount: Int
+        var totalItemCount: Int
+
+
+
+
+        binding.productslistRecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0) { //check for scroll down
+                    visibleItemCount = binding.productslistRecyclerview.getChildCount()
+                    totalItemCount = binding.productslistRecyclerview.layoutManager!!.getItemCount()
+                    pastVisiblesItems =  layoutMangerr.findFirstCompletelyVisibleItemPosition()
+                    if (loading) {
+                        if (visibleItemCount + pastVisiblesItems >= totalItemCount) {
+                            loading = false
+                            Log.d("...", "Last Item Wow !")
+                            binding.listProgressBar2.isVisible = true
+                            productsListViewModel.nextPage()
+                            // Do pagination.. i.e. fetch new data
+                            loading = true
+                        }
+                    }
+                }
+            }
+        })
+
+
+
+
+
+        Log.d("productlistFragment","`test")
 
 
         //getting the data from bundle
@@ -57,6 +100,10 @@ class ProductsListFragment : Fragment() {
 
         }
 
+
+        binding.productslistRecyclerview
+
+
     }
 
 
@@ -64,7 +111,9 @@ class ProductsListFragment : Fragment() {
     fun obervers(){
         productsListViewModel.makeupProductsLiveData.observe(viewLifecycleOwner,{
             it?.let {
+
                 productsListAdapter.submitList(it)
+                allProducts = it
                 binding.listProgressBar.animate().alpha(0f)
                 productsListViewModel.makeupProductsLiveData.postValue(null)
             }
@@ -86,12 +135,27 @@ class ProductsListFragment : Fragment() {
 
         searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                productsListAdapter.submitList(
-                    allProducts.filter {
-                        it.brand?.lowercase()!!.contains(query!!.lowercase())
+                Log.d(TAG,"search")
+                try {
+                    productsListAdapter.submitList(
 
+                        allProducts.filter {
+
+                            it.name?.lowercase()!!.contains(query!!.lowercase())
+
+                        })
+
+                productsListAdapter.submitList(
+                    allProducts.filter{
+                        it.brand?.lowercase()!!.contains(query!!.lowercase())
                     }
                 )
+
+                } catch (e:Exception){
+                    Toast.makeText(requireActivity(), "product not found", Toast.LENGTH_SHORT).show()
+                }
+
+
                 return true
             }
 
@@ -115,4 +179,17 @@ class ProductsListFragment : Fragment() {
         })
 
     }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        productsListViewModel.makeupProductsLiveData.postValue(null)
+
+        productsListViewModel.pagelist = mutableListOf()
+        productsListViewModel.allList = listOf()
+
+    }
+
+
 }

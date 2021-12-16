@@ -1,6 +1,7 @@
 package com.example.beautystop.view
 
 import android.util.Log
+import android.util.Range
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,6 +18,7 @@ private const val TAG = "ProductsListViewModel"
 
 class ProductsListViewModel : ViewModel() {
 
+
     private val apiRepo = ApiServiceRepository.get()
     private val apiWish = WishlistApiServiceRepository.get()
 
@@ -24,6 +26,14 @@ class ProductsListViewModel : ViewModel() {
     val makeupProductsLiveData = MutableLiveData<List<MakeupModel>>()
     val makeupProductsErrorLiveData = MutableLiveData<String>()
     val addMakeupProductsLiveData = MutableLiveData<String>()
+
+    //paging lists
+    var allList = listOf<MakeupModel>()
+    var pagelist = mutableListOf<MakeupModel>()
+    var currentPage = 0
+    var limit = 19
+    var pages = 0
+//    var counter = 0
 
     //for when a specific item is selected to display the details fragment
     val selectItem = MutableLiveData<MakeupModel>()
@@ -33,6 +43,7 @@ class ProductsListViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             //trying to get the response from the api
             try {
+
                 //call the api method to get the api response
                 val response = apiRepo.getPhotos(type)
                 //checking if the response is gotten and is successful
@@ -41,7 +52,18 @@ class ProductsListViewModel : ViewModel() {
 
                     //using the livedata to pass the response to the view
                     response.body()?.run {
-                        makeupProductsLiveData.postValue(this)
+                        allList = this
+
+                        pages = this.size / limit
+
+                        for (item in 0 until limit) {
+                            pagelist.add(allList[item])
+
+                        }
+
+                        currentPage++
+
+                        makeupProductsLiveData.postValue(pagelist)
                     }
 
 
@@ -95,7 +117,7 @@ class ProductsListViewModel : ViewModel() {
                 val response = apiRepo.searchBrand(brand)
                 if (response.isSuccessful) {
                     Log.d(TAG, this.toString())
-                } else{
+                } else {
                     Log.d(TAG, response.message())
                     makeupProductsErrorLiveData.postValue(response.message())
                 }
@@ -107,4 +129,19 @@ class ProductsListViewModel : ViewModel() {
             }
         }
     }
+
+
+    fun nextPage() {
+
+        var startIndex = currentPage*limit
+        var endIndex = (currentPage+1)*limit
+        for(index in startIndex..endIndex){
+            pagelist.add(allList[index])
+        }
+
+    }
+
+
+
 }
+

@@ -2,7 +2,7 @@ package com.example.beautystop.util
 
 import java.util.regex.Pattern
 
-class RegisterationTestingUtil {
+class RegistrationTestingUtil {
 
 
 
