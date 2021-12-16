@@ -1,5 +1,11 @@
 package com.example.beautystop.view
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -23,6 +29,11 @@ import java.lang.NullPointerException
 private const val TAG = "ProductsListFragment"
 class ProductsListFragment : Fragment() {
 
+    lateinit var notificationChannel: NotificationChannel
+    private val channel_id = "notification"
+    lateinit var builder: Notification.Builder
+    private val description = "notification"
+    lateinit var notificationManager: NotificationManager
     private lateinit var layoutMangerr: GridLayoutManager
     private lateinit var binding: FragmentProductsListBinding
     private val productsListViewModel: ProductsListViewModel by activityViewModels()
@@ -34,12 +45,19 @@ class ProductsListFragment : Fragment() {
     ): View? {
         binding = FragmentProductsListBinding.inflate(inflater,container,false)
         return binding.root
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        notificationManager = requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notification()
         obervers()
+
+
+
         productsListAdapter = ProductsAdapter(productsListViewModel,requireContext())
         binding.productslistRecyclerview.adapter = productsListAdapter
 
@@ -181,6 +199,9 @@ class ProductsListFragment : Fragment() {
     }
 
 
+
+
+
     override fun onDestroy() {
         super.onDestroy()
 
@@ -191,5 +212,30 @@ class ProductsListFragment : Fragment() {
 
     }
 
+    fun notification(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            notificationChannel = NotificationChannel(channel_id,description,NotificationManager.IMPORTANCE_HIGH)
 
+
+
+            notificationChannel.enableLights(true)
+//            notificationChannel.lightColor = Color.GREEN
+            notificationChannel.enableVibration(true)
+            notificationManager.createNotificationChannel(notificationChannel)
+
+            builder = Notification.Builder(requireActivity(), channel_id)
+                .setSmallIcon(R.drawable.splash)
+                .setContentTitle("Check ou")
+                .setContentText("Your PewPew Order is Ready ")
+                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.splash))
+
+        } else {
+            builder = Notification.Builder(requireActivity())
+                .setSmallIcon(R.drawable.splash)
+                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.splash))
+        }
+        notificationManager.notify(1234, builder.build())
+    }
 }
+
+
