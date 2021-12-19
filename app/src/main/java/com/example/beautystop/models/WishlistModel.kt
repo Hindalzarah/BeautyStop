@@ -14,5 +14,8 @@ data class WishlistModel(
     val id: String,
     @SerializedName("userId")
     val userId: String,
+    @SerializedName("price")
+    val price: String,
+
 
 )

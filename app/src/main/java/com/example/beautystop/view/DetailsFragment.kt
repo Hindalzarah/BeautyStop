@@ -14,7 +14,8 @@ import com.squareup.picasso.Picasso
 import android.widget.Toast
 import android.content.ActivityNotFoundException
 import android.net.Uri
-
+import androidx.navigation.fragment.findNavController
+import com.example.beautystop.R
 
 
 class DetailsFragment() : Fragment() {
@@ -47,13 +48,19 @@ class DetailsFragment() : Fragment() {
 
                 binding.price.text = "${value.price} USD"
             }
-            binding.rating.text = value.rating.toString()
-            binding.colors.text = value.productColors.toString()
-            if(value.rating != null){
-                binding.rating.text = value.rating.toString()
-            } else{
-                binding.rating.text = "unrated"
-            }
+
+           binding.addtoCartButton.setOnClickListener(){
+
+               val intent = Intent()
+               val price = binding.price.text
+               val name = binding.name.text
+
+
+               intent.putExtra("product_price",price)
+               intent.putExtra("product_name",name)
+
+               findNavController().navigate(R.id.action_detailsFragment_to_shoppingCartFragment)
+           }
 
             binding.website.setOnClickListener() {
                 try {
@@ -82,5 +89,10 @@ class DetailsFragment() : Fragment() {
             }
         }
 
+
+
     }
+
+
+
 }

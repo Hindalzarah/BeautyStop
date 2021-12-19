@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -74,6 +76,7 @@ class ProductsListFragment : Fragment() {
 
 
 
+        // pagination
 
         binding.productslistRecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -84,13 +87,14 @@ class ProductsListFragment : Fragment() {
                     if (loading) {
                         if (visibleItemCount + pastVisiblesItems >= totalItemCount) {
                             loading = false
-                            Log.d("...", "Last Item Wow !")
-                            binding.listProgressBar2.isVisible = true
+                            Log.d("...", "Last Item Wow!")
                             productsListViewModel.nextPage()
                             // Do pagination.. i.e. fetch new data
                             loading = true
                         }
+
                     }
+
                 }
             }
         })
@@ -133,6 +137,7 @@ class ProductsListFragment : Fragment() {
                 productsListAdapter.submitList(it)
                 allProducts = it
                 binding.listProgressBar.animate().alpha(0f)
+
                 productsListViewModel.makeupProductsLiveData.postValue(null)
             }
 
@@ -197,6 +202,19 @@ class ProductsListFragment : Fragment() {
         })
 
     }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId) {
+            R.id.app_bar_bag -> {
+                findNavController().navigate(R.id.action_productsListFragment_to_shoppingCartFragment)
+
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+
+
+    }
 
 
 
@@ -219,14 +237,14 @@ class ProductsListFragment : Fragment() {
 
 
             notificationChannel.enableLights(true)
-//            notificationChannel.lightColor = Color.GREEN
+            notificationChannel.lightColor = Color.GREEN
             notificationChannel.enableVibration(true)
             notificationManager.createNotificationChannel(notificationChannel)
 
             builder = Notification.Builder(requireActivity(), channel_id)
                 .setSmallIcon(R.drawable.splash)
-                .setContentTitle("Check ou")
-                .setContentText("Your PewPew Order is Ready ")
+                .setContentTitle("Alright!")
+                .setContentText("Check out the new products")
                 .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.splash))
 
         } else {
@@ -236,6 +254,8 @@ class ProductsListFragment : Fragment() {
         }
         notificationManager.notify(1234, builder.build())
     }
+
+
 }
 
 

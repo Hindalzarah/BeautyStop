@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Cart" />
     <item
         android:id="@+id/logout"
         android:title="@string/log_out"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/app_bar_search"
-        android:icon="@drawable/ic_baseline_search_24"
-        android:title="Search"
-        app:showAsAction="always|collapseActionView"
-        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+    android:id="@+id/app_bar_search"
+    android:icon="@drawable/ic_baseline_search_24"
+    android:title="Search"
+    app:showAsAction="always|collapseActionView"
+    app:actionViewClass="androidx.appcompat.widget.SearchView" />
+    <item
+        android:id="@+id/app_bar_bag"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:title="Bag"
+        app:showAsAction="always|collapseActionView"/>
 
 </menu>

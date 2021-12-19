@@ -69,8 +69,6 @@ class ProductsAdapter(val productViewModel: ProductsListViewModel, val context: 
             binding.listBrand.text = item.brand
             binding.listName.text = item.name
 
-//               Glide.with(itemView).load(item.imageLink).diskCacheStrategy(
-//                DiskCacheStrategy.ALL).into(binding.imageView)
 
 
             binding.imageView.setOnClickListener() {

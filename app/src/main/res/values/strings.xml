@@ -22,4 +22,6 @@
     <string name="colors">Colors</string>
     <string name="rating">Rating</string>
     <string name="name">Name</string>
+    <string name="place_order">Place Order</string>
+    <string name="add_to_cart_button">Add to cart</string>
 </resources>
