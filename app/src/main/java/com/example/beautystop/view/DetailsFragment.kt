@@ -39,7 +39,6 @@ class DetailsFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         observers()
 
         productViewModel.selectItem.observe(viewLifecycleOwner, Observer { value ->
@@ -112,6 +111,9 @@ class DetailsFragment() : Fragment() {
         detailsViewModel.makeupProductsLiveData.observe(viewLifecycleOwner,{
             it?.let {
 
+                detailsViewModel.makeupProductsErrorLiveData.postValue(it)
+
+//                binding.listProgressBar.animate().alpha(0f)
 
                 detailsViewModel.makeupProductsLiveData.postValue(null)
             }
