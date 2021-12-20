@@ -28,16 +28,21 @@ class ShoppingBagAdapter(private val list: List<ShoppingBagModel>, val viewModel
 
     override fun onBindViewHolder(holder: CartHolder, position: Int) {
         val item = list[position]
-         val quantity = item.quantity
+
         holder.productName.text = item.name
         holder.productPrice.text = item.price.toString()
        Glide.with(context).load(item.image).into(holder.productImage)
 
-        val intent = Intent()
-       Glide.with(context).load(intent.getStringExtra("product_image")).into(holder.productImage)
-        holder.productName.text = intent.getStringExtra("product_name")
-        holder.productPrice.text = intent.getStringExtra("product_price")
 
+       Glide.with(context).load(item.image).into(holder.productImage)
+        holder.productName.text = item.name
+        holder.productPrice.text = item.price.toString()
+        holder.quantity.text = item.quantity.toString()
+
+
+        holder.deleteButton.setOnClickListener{
+            viewModel.deleteFromShoppingBag(item.id)
+        }
 
     }
 
@@ -50,6 +55,7 @@ class ShoppingBagAdapter(private val list: List<ShoppingBagModel>, val viewModel
         var productImage: ImageView = itemView.findViewById(R.id.cart_product_imageview)
         var productName: TextView = itemView.findViewById(R.id.cart_product_name_tv)
         var productPrice: TextView = itemView.findViewById(R.id.cart_product_price_tv)
+        var quantity: TextView = itemView.findViewById(R.id.cart_product_quantity_tv)
         var deleteButton: ImageButton = itemView.findViewById(R.id.cart_delete_button)
     }
 }

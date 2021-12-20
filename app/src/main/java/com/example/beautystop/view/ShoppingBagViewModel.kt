@@ -24,17 +24,15 @@ class ShoppingBagViewModel: ViewModel() {
 
 
 
-
     fun callShoppingBag() {
         viewModelScope.launch(Dispatchers.IO) {
 
             //sending request and trying to get a response
             try {
-                Log.d(TAG,"in try")
 
                 //we need the user id to get the wishlist so we get the user id from the firebase
                 val response = apiRepo.getShoppingBag(FirebaseAuth.getInstance().currentUser!!.uid)
-                //if sucessful
+                //if successful
                 if (response.isSuccessful) {
                     Log.d(TAG,"in if condition")
                     Log.d(TAG,response.toString())
