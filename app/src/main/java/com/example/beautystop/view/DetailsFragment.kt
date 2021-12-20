@@ -16,12 +16,16 @@ import android.content.ActivityNotFoundException
 import android.net.Uri
 import androidx.navigation.fragment.findNavController
 import com.example.beautystop.R
+import com.example.beautystop.models.ShoppingBagModel
 
 
 class DetailsFragment() : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
     private lateinit var makeupModel: MakeupModel
+    private lateinit var shoppingBagModel: ShoppingBagModel
     val productViewModel: ProductsListViewModel by activityViewModels()
+    val detailsViewModel: DetailsViewModel by activityViewModels()
+
 
 
 
@@ -36,31 +40,37 @@ class DetailsFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observers()
 
         productViewModel.selectItem.observe(viewLifecycleOwner, Observer { value ->
             Picasso.get().load(value.imageLink).into(binding.productDetailsImageview)
             binding.name.text = value.brand
             binding.brand.text = value.name
 
+            var counter = 1
+
+
+          binding.detailsPlusButton.setOnClickListener{
+              counter++
+              binding.detailsAmountTextview.text = counter.toString()
+          }
+            binding.detailsMinusButton.setOnClickListener{
+                if( binding.detailsAmountTextview.text != "0") {
+                    counter--
+                    binding.detailsAmountTextview.text = counter.toString()
+                }
+            }
+
+
+
             if(value.price == "0.0"){
-                binding.price.text = "Not Available"
+                binding.price.text = "30"
             } else{
 
                 binding.price.text = "${value.price} USD"
             }
 
-           binding.addtoCartButton.setOnClickListener(){
 
-               val intent = Intent()
-               val price = binding.price.text
-               val name = binding.name.text
-
-
-               intent.putExtra("product_price",price)
-               intent.putExtra("product_name",name)
-
-               findNavController().navigate(R.id.action_detailsFragment_to_shoppingCartFragment)
-           }
 
             binding.website.setOnClickListener() {
                 try {
@@ -87,10 +97,32 @@ class DetailsFragment() : Fragment() {
             if(binding.favoriteToggleButton.isChecked){
                 productViewModel.addToWishlist(makeupModel)
             }
+
+            binding.addtoCartButton.setOnClickListener{
+                detailsViewModel.addToShoppingBag(makeupModel,binding.detailsAmountTextview.text.toString().toInt())
+            }
         }
 
 
 
+    }
+
+    fun observers(){
+
+        detailsViewModel.makeupProductsLiveData.observe(viewLifecycleOwner,{
+            it?.let {
+
+
+                detailsViewModel.makeupProductsLiveData.postValue(null)
+            }
+
+        })
+
+        detailsViewModel.makeupProductsErrorLiveData.observe(viewLifecycleOwner, {
+            it?.let{
+                Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 

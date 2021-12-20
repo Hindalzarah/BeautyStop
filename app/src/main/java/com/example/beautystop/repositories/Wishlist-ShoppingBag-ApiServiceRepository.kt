@@ -2,6 +2,7 @@ package com.example.beautystop.repositories
 
 import android.content.Context
 import com.example.beautystop.api.MakeupApi
+import com.example.beautystop.models.ShoppingBagModel
 import com.example.beautystop.models.WishlistModel
 import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Retrofit
@@ -26,6 +27,12 @@ class WishlistApiServiceRepository(val context: Context)  {
     suspend fun deleteFromWishlist(id:String) = retrofitApi.deleteFromWishlist(id)
     suspend fun editWishlist(id:String,wishlistBody: WishlistModel) = retrofitApi.editWishlist(id,wishlistBody)
 
+
+    //Shopping bag
+    suspend fun getShoppingBag(id:String) = retrofitApi.getShoppingBag(FirebaseAuth.getInstance().currentUser!!.uid)
+    suspend fun addToShoppingCart(shoppingBagBody: ShoppingBagModel) = retrofitApi.addToShoppingBag(shoppingBagBody)
+    suspend fun deleteFromShoppingBag(id:String) = retrofitApi.deleteFromShoppingBag(id)
+    suspend fun editShoppingBag(id:String,shoppingBagBody: ShoppingBagModel) = retrofitApi.editShoppingBag(id,shoppingBagBody)
 
 
     companion object {

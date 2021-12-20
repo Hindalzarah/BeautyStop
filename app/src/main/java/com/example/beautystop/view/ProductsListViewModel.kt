@@ -1,18 +1,17 @@
 package com.example.beautystop.view
 
 import android.util.Log
-import android.util.Range
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.beautystop.models.MakeupModel
+import com.example.beautystop.models.ShoppingBagModel
 import com.example.beautystop.models.WishlistModel
 import com.example.beautystop.repositories.ApiServiceRepository
 import com.example.beautystop.repositories.WishlistApiServiceRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.math.log
 
 private const val TAG = "ProductsListViewModel"
 
@@ -20,12 +19,12 @@ class ProductsListViewModel : ViewModel() {
 
 
     private val apiRepo = ApiServiceRepository.get()
-    private val apiWish = WishlistApiServiceRepository.get()
+    private val apiWish_ShoppingBag = WishlistApiServiceRepository.get()
 
     val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
     val makeupProductsLiveData = MutableLiveData<List<MakeupModel>>()
     val makeupProductsErrorLiveData = MutableLiveData<String>()
-    val addMakeupProductsLiveData = MutableLiveData<String>()
+
 
     //paging lists
     var allList = listOf<MakeupModel>()
@@ -85,11 +84,11 @@ class ProductsListViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
 
-                val response = apiWish.addToWishlist(WishlistModel(wishlistBody.imageLink!!,
+                val response = apiWish_ShoppingBag.addToWishlist(WishlistModel(wishlistBody.imageLink!!,
                     wishlistBody.name!!,
                     1,
                     "",
-                    userId,""))
+                    userId,wishlistBody.price.toString()))
                 if (response.isSuccessful) {
 
 
@@ -110,6 +109,7 @@ class ProductsListViewModel : ViewModel() {
             }
         }
     }
+
 
     fun searchBrand(brand: String) {
         viewModelScope.launch(Dispatchers.IO) {

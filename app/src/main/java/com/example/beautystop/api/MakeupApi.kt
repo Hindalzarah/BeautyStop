@@ -1,6 +1,7 @@
 package com.example.beautystop.api
 
 import com.example.beautystop.models.MakeupModel
+import com.example.beautystop.models.ShoppingBagModel
 import com.example.beautystop.models.WishlistModel
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -41,12 +42,24 @@ interface MakeupApi {
 
 
 
+    //shopping bag functions
+
+    @GET("/shoppingbag")
+    suspend fun getShoppingBag(@Query ("userId") userId: String): Response<List<ShoppingBagModel>>
+
+    //to add products to the wishlist fragment
+    @POST("/shoppingbag")
+    suspend fun addToShoppingBag( @Body ShoppingBag: ShoppingBagModel): Response<ResponseBody>
+
+    //to remove products from the wishlist fragment
+
+    @DELETE("/shoppingbag/{id}")
+    suspend fun deleteFromShoppingBag( @Path("id") Id: String): Response<ResponseBody>
 
 
-
-
-
-
+    @PUT("/shoppingbag/{id}")
+    suspend fun editShoppingBag( @Path("id") Id: String,
+                              @Body ShoppingBag: ShoppingBagModel  ): Response<ShoppingBagModel>
 
 
 

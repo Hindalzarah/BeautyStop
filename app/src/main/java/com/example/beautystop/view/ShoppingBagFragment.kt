@@ -6,31 +6,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beautystop.R
-import com.example.beautystop.models.WishlistModel
-import com.example.beautystop.view.adapter.CartAdapter
+import com.example.beautystop.models.ShoppingBagModel
+import com.example.beautystop.view.adapter.ShoppingBagAdapter
 
-class ShoppingCartFragment : Fragment() {
+class ShoppingBagFragment : Fragment() {
 
     lateinit var reyclerview: RecyclerView
-    lateinit var adapter: CartAdapter
-    private val viewModel: WishlistViewModel by activityViewModels()
-    val model = listOf<WishlistModel>()
+    lateinit var adapter: ShoppingBagAdapter
+    private val viewModel: ShoppingBagViewModel by activityViewModels()
+    val model = listOf<ShoppingBagModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shopping_cart, container, false)
+        return inflater.inflate(R.layout.fragment_shopping_bag, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         reyclerview = view.findViewById(R.id.cart_recyclerciew)
-        adapter = CartAdapter(model,viewModel,requireContext())
+        adapter = ShoppingBagAdapter(model,viewModel,requireContext())
         reyclerview.adapter = adapter
 
     }

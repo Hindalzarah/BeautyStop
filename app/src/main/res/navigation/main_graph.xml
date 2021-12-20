@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/shoppingCartFragment"
-        android:name="com.example.beautystop.view.ShoppingCartFragment"
+        android:name="com.example.beautystop.view.ShoppingBagFragment"
         android:label="Cart"
-        tools:layout="@layout/fragment_shopping_cart" />
+        tools:layout="@layout/fragment_shopping_bag" />
 </navigation>
