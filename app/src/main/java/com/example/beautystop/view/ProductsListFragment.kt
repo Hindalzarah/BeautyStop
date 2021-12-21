@@ -208,6 +208,8 @@ class ProductsListFragment : Fragment() {
             R.id.app_bar_bag -> {
                 findNavController().navigate(R.id.action_productsListFragment_to_shoppingCartFragment)
 
+
+
             }
         }
 

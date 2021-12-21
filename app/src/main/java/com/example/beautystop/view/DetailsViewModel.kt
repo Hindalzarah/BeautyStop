@@ -27,7 +27,7 @@ class DetailsViewModel: ViewModel() {
                 val response = apiWish_ShoppingBag.addToShoppingCart(ShoppingBagModel(shoppingBagModel.imageLink!!,
                     shoppingBagModel.imageLink,
                     shoppingBagModel.name!!,
-                    (shoppingBagModel.price!!.toInt()*quantity),quantity,userId))
+                    (shoppingBagModel.price!!.toDouble()*quantity),quantity,userId))
                 if (response.isSuccessful) {
 
 

@@ -11,7 +11,7 @@ data class ShoppingBagModel(
     @SerializedName("name")
     val name: String,
     @SerializedName("price")
-    val price: Int,
+    val price: Double,
     @SerializedName("quantity")
     val quantity: Int,
     @SerializedName("userId")

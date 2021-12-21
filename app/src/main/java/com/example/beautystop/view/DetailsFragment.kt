@@ -14,18 +14,17 @@ import com.squareup.picasso.Picasso
 import android.widget.Toast
 import android.content.ActivityNotFoundException
 import android.net.Uri
+import android.util.Log
 import androidx.navigation.fragment.findNavController
 import com.example.beautystop.R
 import com.example.beautystop.models.ShoppingBagModel
 
-
+private const val TAG = "DetailsFragment"
 class DetailsFragment() : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
     private lateinit var makeupModel: MakeupModel
-    private lateinit var shoppingBagModel: ShoppingBagModel
-    val productViewModel: ProductsListViewModel by activityViewModels()
-    val detailsViewModel: DetailsViewModel by activityViewModels()
-
+    private val productViewModel: ProductsListViewModel by activityViewModels()
+    private val detailsViewModel: DetailsViewModel by activityViewModels()
 
 
 
@@ -89,6 +88,8 @@ class DetailsFragment() : Fragment() {
 
 
             makeupModel = value
+
+            Log.d(TAG,makeupModel.toString())
         })
 
         binding.favoriteToggleButton.setOnClickListener {
@@ -97,11 +98,12 @@ class DetailsFragment() : Fragment() {
                 productViewModel.addToWishlist(makeupModel)
             }
 
-            binding.addtoCartButton.setOnClickListener{
-                detailsViewModel.addToShoppingBag(makeupModel,binding.detailsAmountTextview.text.toString().toInt())
-            }
+
         }
 
+        binding.addtoCartButton.setOnClickListener{
+            detailsViewModel.addToShoppingBag(makeupModel,binding.detailsAmountTextview.text.toString().toInt())
+        }
 
 
     }
@@ -111,13 +113,10 @@ class DetailsFragment() : Fragment() {
         detailsViewModel.makeupProductsLiveData.observe(viewLifecycleOwner,{
             it?.let {
 
-                detailsViewModel.makeupProductsErrorLiveData.postValue(it)
-
 //                binding.listProgressBar.animate().alpha(0f)
 
                 detailsViewModel.makeupProductsLiveData.postValue(null)
             }
-
         })
 
         detailsViewModel.makeupProductsErrorLiveData.observe(viewLifecycleOwner, {
