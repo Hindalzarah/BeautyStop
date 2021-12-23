@@ -14,7 +14,7 @@ import com.example.beautystop.models.ShoppingBagModel
 import com.example.beautystop.view.ShoppingBagViewModel
 
 
-class ShoppingBagAdapter(private val list: List<ShoppingBagModel>, val viewModel: ShoppingBagViewModel, val context: Context) :
+class ShoppingBagAdapter(var list: MutableList<ShoppingBagModel>, val viewModel: ShoppingBagViewModel, val context: Context) :
     RecyclerView.Adapter<ShoppingBagAdapter.CartHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingBagAdapter.CartHolder {
         return CartHolder(
@@ -36,12 +36,19 @@ class ShoppingBagAdapter(private val list: List<ShoppingBagModel>, val viewModel
 
        Glide.with(context).load(item.image).into(holder.productImage)
         holder.productName.text = item.name
-        holder.productPrice.text = item.price.toString()
-        holder.quantity.text = item.quantity.toString()
+        if(item.price != 0.0){
+            holder.productPrice.text = "${item.price} USD"
+        } else {
+            holder.productPrice.text = "30.0 USD"
+        }
+//        holder.quantity.text = item.quantity.toString()
 
 
         holder.deleteButton.setOnClickListener{
+            list.remove(item)
+            notifyDataSetChanged()
             viewModel.deleteFromShoppingBag(item.id)
+
         }
 
     }
@@ -55,7 +62,7 @@ class ShoppingBagAdapter(private val list: List<ShoppingBagModel>, val viewModel
         var productImage: ImageView = itemView.findViewById(R.id.cart_product_imageview)
         var productName: TextView = itemView.findViewById(R.id.cart_product_name_tv)
         var productPrice: TextView = itemView.findViewById(R.id.cart_product_price_tv)
-        var quantity: TextView = itemView.findViewById(R.id.cart_product_quantity_tv)
+//        var quantity: TextView = itemView.findViewById(R.id.cart_product_quantity_tv)
         var deleteButton: ImageButton = itemView.findViewById(R.id.cart_delete_button)
     }
 }

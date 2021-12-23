@@ -1,6 +1,7 @@
 package com.example.beautystop.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,7 @@ class ShoppingBagFragment : Fragment() {
     lateinit var reyclerview: RecyclerView
     lateinit var adapter: ShoppingBagAdapter
     private val viewModel: ShoppingBagViewModel by activityViewModels()
-    val model = listOf<ShoppingBagModel>()
+    var model = mutableListOf<ShoppingBagModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -30,10 +31,11 @@ class ShoppingBagFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observers()
-        viewModel.callShoppingBag()
         reyclerview = view.findViewById(R.id.cart_recyclerciew)
-        adapter = ShoppingBagAdapter(model, viewModel, requireContext())
+        Log.d("ShoppingFragment",model.toString())
+        adapter = ShoppingBagAdapter(model,viewModel,requireContext())
         reyclerview.adapter = adapter
+        viewModel.callShoppingBag()
 
 
     }
@@ -44,9 +46,14 @@ class ShoppingBagFragment : Fragment() {
 
 
             it?.let {
+               // model = it
+               // Log.d("model",model.toString())
+                adapter.list = it.toMutableList()
+                //adapter = ShoppingBagAdapter(it,viewModel,requireContext())
+                Log.d("ShoppingFragment",it.toString())
+
                 adapter.notifyDataSetChanged()
 
-                viewModel.shoppingBagLiveData.postValue(null)
             }
 
 
