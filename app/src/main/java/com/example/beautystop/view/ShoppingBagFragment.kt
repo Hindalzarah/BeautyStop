@@ -6,8 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beautystop.R
 import com.example.beautystop.models.ShoppingBagModel
@@ -37,6 +40,16 @@ class ShoppingBagFragment : Fragment() {
         reyclerview.adapter = adapter
         viewModel.callShoppingBag()
 
+        val orderButton: Button = view.findViewById(R.id.order_button)
+
+            orderButton.setOnClickListener{
+
+           findNavController().navigate(R.id.action_shoppingCartFragment_to_orderFragment)
+
+                adapter.list.clear()
+                adapter.list.removeAll(model)
+              adapter.notifyDataSetChanged()
+        }
 
     }
 

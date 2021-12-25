@@ -29,13 +29,9 @@ import java.lang.Exception
 import java.lang.NullPointerException
 
 private const val TAG = "ProductsListFragment"
+
 class ProductsListFragment : Fragment() {
 
-    lateinit var notificationChannel: NotificationChannel
-    private val channel_id = "notification"
-    lateinit var builder: Notification.Builder
-    private val description = "notification"
-    lateinit var notificationManager: NotificationManager
     private lateinit var layoutMangerr: GridLayoutManager
     private lateinit var binding: FragmentProductsListBinding
     private val productsListViewModel: ProductsListViewModel by activityViewModels()
@@ -45,7 +41,7 @@ class ProductsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentProductsListBinding.inflate(inflater,container,false)
+        binding = FragmentProductsListBinding.inflate(inflater, container, false)
         return binding.root
 
 
@@ -54,20 +50,19 @@ class ProductsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        notificationManager = requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notification()
+
         obervers()
 
 
 
-        productsListAdapter = ProductsAdapter(productsListViewModel,requireContext())
+        productsListAdapter = ProductsAdapter(productsListViewModel, requireContext())
         binding.productslistRecyclerview.adapter = productsListAdapter
 
 
 
 
-        layoutMangerr = GridLayoutManager(requireContext(),3)
-        binding.productslistRecyclerview.layoutManager=layoutMangerr
+        layoutMangerr = GridLayoutManager(requireContext(), 3)
+        binding.productslistRecyclerview.layoutManager = layoutMangerr
         // paging
         var loading = true
         var pastVisiblesItems: Int
@@ -75,15 +70,15 @@ class ProductsListFragment : Fragment() {
         var totalItemCount: Int
 
 
-
         // pagination
 
-        binding.productslistRecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.productslistRecyclerview.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (dy > 0) { //check for scroll down
                     visibleItemCount = binding.productslistRecyclerview.getChildCount()
                     totalItemCount = binding.productslistRecyclerview.layoutManager!!.getItemCount()
-                    pastVisiblesItems =  layoutMangerr.findFirstCompletelyVisibleItemPosition()
+                    pastVisiblesItems = layoutMangerr.findFirstCompletelyVisibleItemPosition()
                     if (loading) {
                         if (visibleItemCount + pastVisiblesItems >= totalItemCount) {
                             loading = false
@@ -103,19 +98,19 @@ class ProductsListFragment : Fragment() {
 
 
 
-        Log.d("productlistFragment","`test")
+        Log.d("productlistFragment", "`test")
 
 
         //getting the data from bundle
         val product_type = arguments?.getString("Type")
-       //null safety
-        product_type?.let{
-            Log.d("productlistFragment",product_type)
+        //null safety
+        product_type?.let {
+            Log.d("productlistFragment", product_type)
 
             //when to check for multiple arguments
-            when(product_type){
+            when (product_type) {
                 //when the user clicks on Face get the foundation data from the api
-                "Face" ->  productsListViewModel.callMakeupProducts("foundation")
+                "Face" -> productsListViewModel.callMakeupProducts("foundation")
                 "Eyes" -> productsListViewModel.callMakeupProducts("eyeshadow")
                 "Lips" -> productsListViewModel.callMakeupProducts("lipstick")
             }
@@ -129,9 +124,8 @@ class ProductsListFragment : Fragment() {
     }
 
 
-
-    fun obervers(){
-        productsListViewModel.makeupProductsLiveData.observe(viewLifecycleOwner,{
+    fun obervers() {
+        productsListViewModel.makeupProductsLiveData.observe(viewLifecycleOwner, {
             it?.let {
 
                 productsListAdapter.submitList(it)
@@ -144,7 +138,7 @@ class ProductsListFragment : Fragment() {
         })
 
         productsListViewModel.makeupProductsErrorLiveData.observe(viewLifecycleOwner, {
-            it?.let{
+            it?.let {
                 Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
             }
         })
@@ -156,9 +150,10 @@ class ProductsListFragment : Fragment() {
         val searchItem = menu.findItem(R.id.app_bar_search)
         val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
 
-        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Log.d(TAG,"search")
+                Log.d(TAG, "search")
                 try {
                     productsListAdapter.submitList(
 
@@ -168,14 +163,15 @@ class ProductsListFragment : Fragment() {
 
                         })
 
-                productsListAdapter.submitList(
-                    allProducts.filter{
-                        it.brand?.lowercase()!!.contains(query!!.lowercase())
-                    }
-                )
+                    productsListAdapter.submitList(
+                        allProducts.filter {
+                            it.brand?.lowercase()!!.contains(query!!.lowercase())
+                        }
+                    )
 
-                } catch (e:Exception){
-                    Toast.makeText(requireActivity(), "product not found", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    Toast.makeText(requireActivity(), "product not found", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
 
@@ -202,12 +198,12 @@ class ProductsListFragment : Fragment() {
         })
 
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.app_bar_bag -> {
                 findNavController().navigate(R.id.action_productsListFragment_to_shoppingCartFragment)
-
 
 
             }
@@ -219,42 +215,20 @@ class ProductsListFragment : Fragment() {
     }
 
 
-
-
-
     override fun onDestroy() {
         super.onDestroy()
 
         productsListViewModel.makeupProductsLiveData.postValue(null)
 
+        /** to clear out the reyclerview when you click the back button **/
+
+        /* these two lines fix the paging problem when I click a different category the same items in the
+        previous category appear as will as the current category items
+         */
+
         productsListViewModel.pagelist = mutableListOf()
         productsListViewModel.allList = listOf()
 
-    }
-
-    fun notification(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            notificationChannel = NotificationChannel(channel_id,description,NotificationManager.IMPORTANCE_HIGH)
-
-
-
-            notificationChannel.enableLights(true)
-            notificationChannel.lightColor = Color.GREEN
-            notificationChannel.enableVibration(true)
-            notificationManager.createNotificationChannel(notificationChannel)
-
-            builder = Notification.Builder(requireActivity(), channel_id)
-                .setSmallIcon(R.drawable.splash)
-                .setContentTitle("Alright!")
-                .setContentText("Check out the new products")
-                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.splash))
-
-        } else {
-            builder = Notification.Builder(requireActivity())
-                .setSmallIcon(R.drawable.splash)
-                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.splash))
-        }
-        notificationManager.notify(1234, builder.build())
     }
 
 

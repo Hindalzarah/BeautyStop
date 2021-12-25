@@ -30,7 +30,7 @@ class ProductsListViewModel : ViewModel() {
     var allList = listOf<MakeupModel>()
     var pagelist = mutableListOf<MakeupModel>()
     var currentPage = 0
-    var limit = 19
+    var limit = 15
     var pages = 0
 //    var counter = 0
 

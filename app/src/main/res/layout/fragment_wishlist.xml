@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:gravity="center"
-        android:text="Favorites"
+        android:text="Wishlist"
         android:textColor="@color/header_textcolor"
         android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"

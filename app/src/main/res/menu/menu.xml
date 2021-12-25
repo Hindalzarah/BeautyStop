@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_baseline_home_24"
         android:title="home" />
     <item
-        android:id="@+id/favoritesFragment"
+        android:id="@+id/Wishlist_fragment"
         android:icon="@drawable/ic_wish"
         android:title="wishlist" />
 </menu>

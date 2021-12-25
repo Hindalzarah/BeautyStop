@@ -5,9 +5,11 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.beautystop.R
 import com.example.beautystop.models.ShoppingBagModel
@@ -41,7 +43,7 @@ class ShoppingBagAdapter(var list: MutableList<ShoppingBagModel>, val viewModel:
         } else {
             holder.productPrice.text = "30.0 USD"
         }
-//        holder.quantity.text = item.quantity.toString()
+        holder.quantity.text = "Quantity: ${item.quantity}"
 
 
         holder.deleteButton.setOnClickListener{
@@ -50,6 +52,8 @@ class ShoppingBagAdapter(var list: MutableList<ShoppingBagModel>, val viewModel:
             viewModel.deleteFromShoppingBag(item.id)
 
         }
+
+
 
     }
 
@@ -62,7 +66,7 @@ class ShoppingBagAdapter(var list: MutableList<ShoppingBagModel>, val viewModel:
         var productImage: ImageView = itemView.findViewById(R.id.cart_product_imageview)
         var productName: TextView = itemView.findViewById(R.id.cart_product_name_tv)
         var productPrice: TextView = itemView.findViewById(R.id.cart_product_price_tv)
-//        var quantity: TextView = itemView.findViewById(R.id.cart_product_quantity_tv)
+        var quantity: TextView = itemView.findViewById(R.id.cart_product_quantity_tv)
         var deleteButton: ImageButton = itemView.findViewById(R.id.cart_delete_button)
     }
 }

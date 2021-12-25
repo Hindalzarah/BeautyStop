@@ -25,4 +25,5 @@
     <string name="place_order">Place Order</string>
     <string name="add_to_cart_button">Add to cart</string>
     <string name="face">Face</string>
+    <string name="checkout_text">Your order has been recieved! \n Thank You!</string>
 </resources>

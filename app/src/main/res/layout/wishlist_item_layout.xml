@@ -3,41 +3,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp"
 
-    android:backgroundTint="@color/white"
-    app:cardCornerRadius="30dp"
-
     android:background="@android:drawable/screen_background_light_transparent"
+    android:backgroundTint="@color/white"
+
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:cardCornerRadius="40dp">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/imageview_boarder"
         android:gravity="center"
         android:orientation="vertical">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/favorites_imageview"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="15dp"
-            android:layout_weight="1"
-            android:fadingEdge="vertical"
-            android:requiresFadingEdge="horizontal"
-            tools:srcCompat="@tools:sample/avatars" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/favorites_imageview"
+                android:layout_width="102dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="5dp"
+                android:fadingEdge="vertical"
+                android:requiresFadingEdge="horizontal"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <ImageButton
+                android:id="@+id/delete_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/imageview_boarder"
+                android:backgroundTint="@color/white"
+                app:srcCompat="@drawable/ic_baseline_delete_24" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/product_name_wishlist_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView" />
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="TextView"
+            android:textColor="@color/black" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -78,15 +94,6 @@
 
 
         </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/delete_button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:background="@drawable/imageview_boarder"
-            android:backgroundTint="@color/white"
-            app:srcCompat="@drawable/ic_baseline_delete_24" />
 
     </LinearLayout>
 
