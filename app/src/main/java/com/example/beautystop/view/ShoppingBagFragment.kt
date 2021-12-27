@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isEmpty
 import androidx.core.view.isNotEmpty
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -19,10 +22,13 @@ import com.example.beautystop.view.adapter.ShoppingBagAdapter
 
 class ShoppingBagFragment : Fragment() {
 
-    lateinit var reyclerview: RecyclerView
+
     lateinit var adapter: ShoppingBagAdapter
     private val viewModel: ShoppingBagViewModel by activityViewModels()
     var model = mutableListOf<ShoppingBagModel>()
+    lateinit var recyclerView: RecyclerView
+    lateinit var emptyTextView: TextView
+    lateinit var orderButton: Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -34,18 +40,23 @@ class ShoppingBagFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
+
         observers()
-        reyclerview = view.findViewById(R.id.cart_recyclerciew)
+        recyclerView = view.findViewById(R.id.cart_recyclerciew)
+
         Log.d("ShoppingFragment",model.toString())
         adapter = ShoppingBagAdapter(model,viewModel,requireContext())
-        reyclerview.adapter = adapter
+        recyclerView.adapter = adapter
         viewModel.callShoppingBag()
+        emptyTextView = view.findViewById(R.id.empty_shoppingbag_tv)
 
-        val orderButton: Button = view.findViewById(R.id.order_button)
+        orderButton = view.findViewById(R.id.order_button)
 
             orderButton.setOnClickListener{
 
-                if(reyclerview.isNotEmpty()){
+                if(recyclerView.isNotEmpty()){
            findNavController().navigate(R.id.action_shoppingCartFragment_to_orderFragment) }
                 else{
                     Toast.makeText(requireContext(), "your bag is empty :(", Toast.LENGTH_SHORT).show()
@@ -74,6 +85,12 @@ class ShoppingBagFragment : Fragment() {
                 Log.d("ShoppingFragment",it.toString())
 
                 adapter.notifyDataSetChanged()
+
+            }
+
+            if(it.isEmpty()){
+                emptyTextView.isVisible = true
+                orderButton.isVisible = false
 
             }
 

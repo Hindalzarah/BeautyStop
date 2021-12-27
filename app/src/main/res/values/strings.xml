@@ -26,5 +26,6 @@
     <string name="add_to_cart_button">Add to cart</string>
     <string name="face">Face</string>
     <string name="checkout_text">Your order has been recieved! \n Thank You!</string>
-    <string name="empty_wishlist">There\'s nothing here! :(  \n Tip: Add new items to your wishlist :)</string>
+    <string name="empty_wishlist">your wishlist is empty. \n Tip: add products to your wishlist.</string>
+    <string name="empty">your bag is empty. \n Tip: add products to your shopping bag.</string>
 </resources>

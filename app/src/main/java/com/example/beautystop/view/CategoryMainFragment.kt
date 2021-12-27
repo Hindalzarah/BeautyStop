@@ -71,7 +71,7 @@ class CategoryMainFragment : Fragment() {
 
         val logout = menu.findItem(R.id.logout)
 
-        val bag = menu.findItem(R.id.action_categoryMainFragment_to_shoppingCartFragment)
+        val bag = menu.findItem(R.id.shoppingBagFragment)
 
         logout.setOnMenuItemClickListener {
             FirebaseAuth.getInstance().signOut()
@@ -92,7 +92,10 @@ class CategoryMainFragment : Fragment() {
 
 
 
+
+
     }
+
 
 
 
@@ -100,8 +103,8 @@ class CategoryMainFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when(item.itemId) {
-            R.id.action_categoryMainFragment_to_shoppingCartFragment -> {
-                findNavController().navigate(R.id.action_categoryMainFragment_to_shoppingCartFragment)
+            R.id.shoppingBagFragment -> {
+                findNavController().navigate(R.id.shoppingBagFragment)
 
             }
         }

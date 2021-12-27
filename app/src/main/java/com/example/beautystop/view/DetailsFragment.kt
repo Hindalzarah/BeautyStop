@@ -62,7 +62,7 @@ class DetailsFragment() : Fragment() {
 
 
             if(value.price == "0.0"){
-                binding.price.text = "30"
+                binding.price.text = "30 USD"
             } else{
 
                 binding.price.text = "${value.price} USD"
@@ -93,6 +93,7 @@ class DetailsFragment() : Fragment() {
         })
 
         binding.favoriteToggleButton.setOnClickListener {
+            Toast.makeText(requireContext(), "product added to your wishlist", Toast.LENGTH_SHORT).show()
 
             if(binding.favoriteToggleButton.isChecked){
                 productViewModel.addToWishlist(makeupModel)
@@ -102,6 +103,7 @@ class DetailsFragment() : Fragment() {
         }
 
         binding.addtoCartButton.setOnClickListener{
+            Toast.makeText(requireContext(), "product added to your shopping bag", Toast.LENGTH_SHORT).show()
             detailsViewModel.addToShoppingBag(makeupModel,binding.detailsAmountTextview.text.toString().toInt())
         }
 

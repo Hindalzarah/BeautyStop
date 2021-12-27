@@ -137,6 +137,7 @@ class ProductsListFragment : Fragment() {
 
         val searchItem = menu.findItem(R.id.app_bar_search)
         val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
+        val bag = menu.findItem(R.id.action_productsListFragment_to_shoppingCartFragment)
 
         searchView.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -190,7 +191,7 @@ class ProductsListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.action_categoryMainFragment_to_shoppingCartFragment -> {
+            R.id.shoppingBagFragment -> {
                 findNavController().navigate(R.id.action_productsListFragment_to_shoppingCartFragment)
 
 

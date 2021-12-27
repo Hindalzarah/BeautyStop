@@ -14,7 +14,7 @@
             android:id="@+id/action_categoryMainFragment_to_productsListFragment"
             app:destination="@id/productsListFragment" />
         <action
-            android:id="@+id/action_categoryMainFragment_to_shoppingCartFragment"
+            android:id="@+id/shoppingBagFragment"
             app:destination="@id/shoppingCartFragment" />
         <action
             android:id="@+id/action_categoryMainFragment_self"
@@ -33,7 +33,11 @@
         android:id="@+id/Wishlist_fragment"
         android:name="com.example.beautystop.view.WishlistFragment"
         android:label="Wishlist"
-        tools:layout="@layout/fragment_wishlist" />
+        tools:layout="@layout/fragment_wishlist" >
+        <action
+            android:id="@+id/action_Wishlist_fragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
+    </fragment>
     <fragment
         android:id="@+id/productsListFragment"
         android:name="com.example.beautystop.view.ProductsListFragment"

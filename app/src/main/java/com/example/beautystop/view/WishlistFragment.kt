@@ -3,6 +3,7 @@ package com.example.beautystop.view
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -10,6 +11,8 @@ import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.example.beautystop.R
 import com.example.beautystop.databinding.FragmentWishlistBinding
 import com.example.beautystop.view.adapter.WishlistAdapter
 
@@ -31,9 +34,7 @@ class WishlistFragment : Fragment() {
 
 
 
-        if(binding.wishlistRecyclerview.isEmpty()){
-            binding.emptyWishlistTv.isVisible = true
-        }
+
 
         observrs()
 
@@ -45,9 +46,19 @@ class WishlistFragment : Fragment() {
         wishlistViewModel.callWishlist()
 
 
-
-
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
+
+        when (item.itemId) {
+            R.id.Wishlist_fragment -> {
+                findNavController().navigate(R.id.shoppingBagFragment)
+
+            }
+        }
+    }
+
 
 
 
@@ -57,6 +68,10 @@ class WishlistFragment : Fragment() {
             wishlistAdapter.submitList(it)
 
             binding.favoritesProgressBar.animate().alpha(0f)
+
+            if(it.isEmpty()){
+                binding.emptyWishlistTv.isVisible = true
+            }
         })
 
         wishlistViewModel.wishlistErrorLiveData.observe(viewLifecycleOwner, Observer {
@@ -64,6 +79,8 @@ class WishlistFragment : Fragment() {
                 Toast.makeText(requireActivity(), "$it wish", Toast.LENGTH_SHORT).show()
             }
         })
+
+
 
     }
 }

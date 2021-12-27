@@ -11,7 +11,7 @@
         android:icon="@drawable/ic_wish"
         android:title="wishlist" />
     <item
-        android:id="@+id/action_categoryMainFragment_to_shoppingCartFragment"
+        android:id="@+id/shoppingBagFragment"
         android:icon="@drawable/ic_baseline_shopping_bag_24"
         android:title="Bag"
         />
