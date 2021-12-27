@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_categoryMainFragment_to_shoppingCartFragment"
             app:destination="@id/shoppingCartFragment" />
+        <action
+            android:id="@+id/action_categoryMainFragment_self"
+            app:destination="@id/categoryMainFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"

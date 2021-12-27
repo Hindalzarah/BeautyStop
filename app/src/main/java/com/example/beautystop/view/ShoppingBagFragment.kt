@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.view.isNotEmpty
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -44,11 +45,18 @@ class ShoppingBagFragment : Fragment() {
 
             orderButton.setOnClickListener{
 
-           findNavController().navigate(R.id.action_shoppingCartFragment_to_orderFragment)
+                if(reyclerview.isNotEmpty()){
+           findNavController().navigate(R.id.action_shoppingCartFragment_to_orderFragment) }
+                else{
+                    Toast.makeText(requireContext(), "your bag is empty :(", Toast.LENGTH_SHORT).show()
+                }
 
                 adapter.list.clear()
                 adapter.list.removeAll(model)
               adapter.notifyDataSetChanged()
+                model.forEach {
+                    viewModel.deleteFromShoppingBag(it.id)
+                }
         }
 
     }
@@ -59,7 +67,7 @@ class ShoppingBagFragment : Fragment() {
 
 
             it?.let {
-               // model = it
+                model = it.toMutableList()
                // Log.d("model",model.toString())
                 adapter.list = it.toMutableList()
                 //adapter = ShoppingBagAdapter(it,viewModel,requireContext())

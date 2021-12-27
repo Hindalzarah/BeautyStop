@@ -29,7 +29,7 @@ class WishlistAdapter(val viewModel: WishlistViewModel) :
 }
 
 
-    private val differ = AsyncListDiffer(this,DIFF_CALLBACK)
+    val differ = AsyncListDiffer(this,DIFF_CALLBACK)
 
     fun submitList(list: List<WishlistModel>) {
         differ.submitList(list)

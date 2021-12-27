@@ -1,32 +1,20 @@
 package com.example.beautystop.view
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
-import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.SearchView
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beautystop.R
 import com.example.beautystop.databinding.FragmentProductsListBinding
 import com.example.beautystop.models.MakeupModel
 import com.example.beautystop.view.adapter.ProductsAdapter
 
-import com.google.android.material.tabs.TabLayout
 import java.lang.Exception
-import java.lang.NullPointerException
 
 private const val TAG = "ProductsListFragment"
 
@@ -202,7 +190,7 @@ class ProductsListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.app_bar_bag -> {
+            R.id.action_categoryMainFragment_to_shoppingCartFragment -> {
                 findNavController().navigate(R.id.action_productsListFragment_to_shoppingCartFragment)
 
 

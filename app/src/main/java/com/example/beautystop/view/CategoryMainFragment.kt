@@ -4,15 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.beautystop.R
 import com.example.beautystop.databinding.FragmentCategoryMainBinding
-import com.example.beautystop.databinding.FragmentProductsListBinding
 import com.example.beautystop.models.MakeupModel
 //import com.example.beautystop.view.identity.LoginActivity
 //import com.example.beautystop.view.identity.SHARED_PREF_FILE
@@ -75,7 +71,8 @@ class CategoryMainFragment : Fragment() {
 
         val logout = menu.findItem(R.id.logout)
 
-        val bag = menu.findItem(R.id.app_bar_bag)
+        val bag = menu.findItem(R.id.action_categoryMainFragment_to_shoppingCartFragment)
+
         logout.setOnMenuItemClickListener {
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(requireActivity(), LoginActivity::class.java)
@@ -91,13 +88,19 @@ class CategoryMainFragment : Fragment() {
 
         }
 
+        var search = menu.findItem(R.id.app_bar_search).setVisible(false)
+
+
 
     }
+
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when(item.itemId) {
-            R.id.app_bar_bag -> {
+            R.id.action_categoryMainFragment_to_shoppingCartFragment -> {
                 findNavController().navigate(R.id.action_categoryMainFragment_to_shoppingCartFragment)
 
             }
