@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -25,15 +24,13 @@ class WishlistFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+
         binding = FragmentWishlistBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
 
 
         observrs()
@@ -48,16 +45,18 @@ class WishlistFragment : Fragment() {
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
-
-        when (item.itemId) {
-            R.id.Wishlist_fragment -> {
-                findNavController().navigate(R.id.shoppingBagFragment)
-
-            }
-        }
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return super.onOptionsItemSelected(item)
+////
+////        when (item.itemId) {
+////            R.id.Wishlist_fragment -> {
+////                findNavController().navigate(R.id.shoppingCartFragment)
+////
+////            }
+////
+////
+////    }
+//        }
 
 
 
@@ -71,6 +70,8 @@ class WishlistFragment : Fragment() {
 
             if(it.isEmpty()){
                 binding.emptyWishlistTv.isVisible = true
+            } else{
+                binding.emptyWishlistTv.isVisible = false
             }
         })
 

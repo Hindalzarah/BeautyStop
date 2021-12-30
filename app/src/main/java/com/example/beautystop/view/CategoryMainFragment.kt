@@ -71,21 +71,24 @@ class CategoryMainFragment : Fragment() {
 
         val logout = menu.findItem(R.id.logout)
 
-        val bag = menu.findItem(R.id.shoppingBagFragment)
+        val orders = menu.findItem(R.id.ordersFragment)
 
         logout.setOnMenuItemClickListener {
-            FirebaseAuth.getInstance().signOut()
-            val intent = Intent(requireActivity(), LoginActivity::class.java)
-            sharedPref =
-                requireActivity().getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
+
+            sharedPref = requireActivity().getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
             sharedPrefEditor = sharedPref.edit()
             sharedPrefEditor.putBoolean("isLogged?", false)
             sharedPrefEditor.commit()
-            startActivity(intent)
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            requireActivity().finish()
+true
+        }
 
+        orders.setOnMenuItemClickListener {
+
+            findNavController().navigate(R.id.action_categoryMainFragment_to_ordersFragment)
             true
-
-
         }
 
         var search = menu.findItem(R.id.app_bar_search).setVisible(false)
@@ -103,8 +106,8 @@ class CategoryMainFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when(item.itemId) {
-            R.id.shoppingBagFragment -> {
-                findNavController().navigate(R.id.shoppingBagFragment)
+            R.id.shoppingCartFragment -> {
+                findNavController().navigate(R.id.shoppingCartFragment)
 
             }
         }

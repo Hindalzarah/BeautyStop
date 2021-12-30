@@ -46,28 +46,29 @@ class ShoppingBagFragment : Fragment() {
         observers()
         recyclerView = view.findViewById(R.id.cart_recyclerciew)
 
-        Log.d("ShoppingFragment",model.toString())
-        adapter = ShoppingBagAdapter(model,viewModel,requireContext())
+        Log.d("ShoppingFragment", model.toString())
+        adapter = ShoppingBagAdapter(model, viewModel, requireContext())
         recyclerView.adapter = adapter
         viewModel.callShoppingBag()
         emptyTextView = view.findViewById(R.id.empty_shoppingbag_tv)
 
         orderButton = view.findViewById(R.id.order_button)
 
-            orderButton.setOnClickListener{
+        orderButton.setOnClickListener {
 
-                if(recyclerView.isNotEmpty()){
-           findNavController().navigate(R.id.action_shoppingCartFragment_to_orderFragment) }
-                else{
-                    Toast.makeText(requireContext(), "your bag is empty :(", Toast.LENGTH_SHORT).show()
-                }
+            if (recyclerView.isNotEmpty()) {
+                findNavController().navigate(R.id.action_shoppingCartFragment_to_orderFragment)
+            } else {
+                Toast.makeText(requireContext(), "your bag is empty :(", Toast.LENGTH_SHORT).show()
+            }
 
-                adapter.list.clear()
-                adapter.list.removeAll(model)
-              adapter.notifyDataSetChanged()
-                model.forEach {
-                    viewModel.deleteFromShoppingBag(it.id)
-                }
+            adapter.list.clear()
+            adapter.list.removeAll(model)
+            adapter.notifyDataSetChanged()
+            model.forEach {
+                viewModel.deleteFromShoppingBag(it.id)
+            }
+
         }
 
     }
@@ -79,19 +80,23 @@ class ShoppingBagFragment : Fragment() {
 
             it?.let {
                 model = it.toMutableList()
-               // Log.d("model",model.toString())
+                // Log.d("model",model.toString())
                 adapter.list = it.toMutableList()
                 //adapter = ShoppingBagAdapter(it,viewModel,requireContext())
-                Log.d("ShoppingFragment",it.toString())
+                Log.d("ShoppingFragment", it.toString())
 
                 adapter.notifyDataSetChanged()
 
             }
 
-            if(it.isEmpty()){
+
+            if (it.isEmpty()) {
                 emptyTextView.isVisible = true
                 orderButton.isVisible = false
 
+            } else {
+                emptyTextView.isVisible = false
+                orderButton.isVisible = true
             }
 
 

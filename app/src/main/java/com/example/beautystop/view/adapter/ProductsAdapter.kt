@@ -35,6 +35,7 @@ class ProductsAdapter(val productViewModel: ProductsListViewModel, val context: 
     }
 
 
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,

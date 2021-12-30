@@ -1,11 +1,14 @@
 package com.example.beautystop.view.adapter
 
+import android.content.Intent
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import com.example.beautystop.R
 import com.example.beautystop.databinding.WishlistItemLayoutBinding
 import com.example.beautystop.models.WishlistModel
 import com.example.beautystop.view.WishlistViewModel
@@ -112,7 +115,11 @@ class WishlistAdapter(val viewModel: WishlistViewModel) :
             binding.productNameWishlistTv.text = item.name
             binding.amountTextview.text = item.quantity.toString()
 
+            binding.wishlistCardview.setOnClickListener {
+              TODO()
             }
+            }
+
 
 
         }

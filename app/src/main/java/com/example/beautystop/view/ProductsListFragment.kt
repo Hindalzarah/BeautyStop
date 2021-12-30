@@ -1,5 +1,6 @@
 package com.example.beautystop.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -13,6 +14,7 @@ import com.example.beautystop.R
 import com.example.beautystop.databinding.FragmentProductsListBinding
 import com.example.beautystop.models.MakeupModel
 import com.example.beautystop.view.adapter.ProductsAdapter
+import com.google.firebase.auth.FirebaseAuth
 
 import java.lang.Exception
 
@@ -137,7 +139,21 @@ class ProductsListFragment : Fragment() {
 
         val searchItem = menu.findItem(R.id.app_bar_search)
         val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
-        val bag = menu.findItem(R.id.action_productsListFragment_to_shoppingCartFragment)
+//        val bag = menu.findItem(R.id.action_productsListFragment_to_shoppingCartFragment)
+
+        val logout = menu.findItem(R.id.logout)
+        val orders = menu.findItem(R.id.ordersFragment)
+        logout.setOnMenuItemClickListener {
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            requireActivity().finish()
+            true
+        }
+        orders.setOnMenuItemClickListener {
+
+            findNavController().navigate(R.id.action_productsListFragment_to_ordersFragment)
+            true
+        }
 
         searchView.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -191,7 +207,7 @@ class ProductsListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.shoppingBagFragment -> {
+            R.id.shoppingCartFragment -> {
                 findNavController().navigate(R.id.action_productsListFragment_to_shoppingCartFragment)
 
 
@@ -209,7 +225,7 @@ class ProductsListFragment : Fragment() {
 
         productsListViewModel.makeupProductsLiveData.postValue(null)
 
-        /** to clear out the reyclerview when you click the back button **/
+        /** to clear out the recyclerview when you click the back button **/
 
         /* these two lines fix the paging problem when I click a different category the same items in the
         previous category appear as will as the current category items

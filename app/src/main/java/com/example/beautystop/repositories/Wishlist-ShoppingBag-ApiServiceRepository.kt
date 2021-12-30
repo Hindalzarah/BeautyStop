@@ -22,6 +22,7 @@ class WishlistApiServiceRepository(val context: Context)  {
 
 
 
+
     suspend fun getWishlist(id:String) = retrofitApi.getWishlist(FirebaseAuth.getInstance().currentUser!!.uid)
     suspend fun addToWishlist(wishlistBody: WishlistModel) = retrofitApi.addToWishlist(wishlistBody)
     suspend fun deleteFromWishlist(id:String) = retrofitApi.deleteFromWishlist(id)

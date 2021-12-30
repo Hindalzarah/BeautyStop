@@ -2,28 +2,26 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wishlist_cardview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     android:layout_margin="10dp"
-
-    android:background="@android:drawable/screen_background_light_transparent"
-    android:backgroundTint="@color/white"
-
     android:gravity="center"
     android:orientation="vertical"
+    app:cardBackgroundColor="@color/background"
     app:cardCornerRadius="40dp">
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@drawable/imageview_boarder"
-        android:gravity="center"
+        android:background="@color/background"
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -31,67 +29,78 @@
                 android:id="@+id/favorites_imageview"
                 android:layout_width="102dp"
                 android:layout_height="100dp"
+                android:layout_margin="15dp"
                 android:layout_marginTop="5dp"
                 android:fadingEdge="vertical"
                 android:requiresFadingEdge="horizontal"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <ImageButton
-                android:id="@+id/delete_button"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/imageview_boarder"
-                android:backgroundTint="@color/white"
-                app:srcCompat="@drawable/ic_baseline_delete_24" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/product_name_wishlist_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="TextView"
-            android:textColor="@color/black" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/minus_button"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/imageview_boarder"
-                android:backgroundTint="@color/white"
-                app:srcCompat="@drawable/ic_baseline_remove_24" />
-
-            <TextView
-                android:id="@+id/amount_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="45dp"
                 android:gravity="center"
-                android:text="1"
-                android:textColor="@color/black" />
+                android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/plus_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/imageview_boarder"
-                android:backgroundTint="@color/white"
-                app:srcCompat="@drawable/ic_baseline_add_24" />
+                <TextView
+                    android:id="@+id/product_name_wishlist_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textColor="@color/black" />
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/minus_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/imageview_boarder"
+                        android:backgroundTint="@color/background"
+                        app:srcCompat="@drawable/ic_baseline_remove_24" />
+
+                    <TextView
+                        android:id="@+id/amount_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/black" />
+
+                    <ImageButton
+                        android:id="@+id/plus_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background"
+                        android:backgroundTint="@color/background"
+                        app:srcCompat="@drawable/ic_baseline_add_24" />
+
+                    <ImageButton
+                        android:id="@+id/delete_button"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="40dp"
+                        android:background="@drawable/imageview_boarder"
+                        android:backgroundTint="@color/background"
+                        app:srcCompat="@drawable/ic_baseline_delete_24" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
