@@ -34,7 +34,6 @@ class ProductsListFragment : Fragment() {
         binding = FragmentProductsListBinding.inflate(inflater, container, false)
         return binding.root
 
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,14 +42,8 @@ class ProductsListFragment : Fragment() {
 
         obervers()
 
-
-
         productsListAdapter = ProductsAdapter(productsListViewModel, requireContext())
         binding.productslistRecyclerview.adapter = productsListAdapter
-
-
-
-
         layoutMangerr = GridLayoutManager(requireContext(), 3)
         binding.productslistRecyclerview.layoutManager = layoutMangerr
         // paging
@@ -77,16 +70,10 @@ class ProductsListFragment : Fragment() {
                             // Do pagination.. i.e. fetch new data
                             loading = true
                         }
-
                     }
-
                 }
             }
         })
-
-
-
-
 
         Log.d("productlistFragment", "`test")
 
@@ -104,12 +91,8 @@ class ProductsListFragment : Fragment() {
                 "Eyes" -> productsListViewModel.callMakeupProducts("eyeshadow")
                 "Lips" -> productsListViewModel.callMakeupProducts("lipstick")
             }
-
         }
-
-
         binding.productslistRecyclerview
-
 
     }
 
@@ -124,9 +107,7 @@ class ProductsListFragment : Fragment() {
 
                 productsListViewModel.makeupProductsLiveData.postValue(null)
             }
-
         })
-
         productsListViewModel.makeupProductsErrorLiveData.observe(viewLifecycleOwner, {
             it?.let {
                 Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
@@ -179,7 +160,6 @@ class ProductsListFragment : Fragment() {
                         .show()
                 }
 
-
                 return true
             }
 
@@ -187,7 +167,6 @@ class ProductsListFragment : Fragment() {
 
                 return true
             }
-
         })
 
         searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
@@ -201,7 +180,6 @@ class ProductsListFragment : Fragment() {
             }
 
         })
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -209,16 +187,10 @@ class ProductsListFragment : Fragment() {
         when (item.itemId) {
             R.id.shoppingCartFragment -> {
                 findNavController().navigate(R.id.action_productsListFragment_to_shoppingCartFragment)
-
-
             }
         }
-
         return super.onOptionsItemSelected(item)
-
-
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
@@ -236,7 +208,5 @@ class ProductsListFragment : Fragment() {
 
     }
 
-
 }
-
 

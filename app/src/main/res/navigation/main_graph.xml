@@ -66,15 +66,22 @@
         tools:layout="@layout/fragment_shopping_bag">
         <action
             android:id="@+id/action_shoppingCartFragment_to_orderFragment"
-            app:destination="@id/orderFragment" />
+            app:destination="@id/ConfirmationFragment" />
         <action
             android:id="@+id/action_shoppingCartFragment_to_ordersFragment"
             app:destination="@id/ordersFragment" />
+        <action
+            android:id="@+id/action_shoppingCartFragment_to_orderFragment"
+            app:destination="@id/ConfirmationFragment" />
     </fragment>
     <fragment
-        android:id="@+id/orderFragment"
+        android:id="@+id/ConfirmationFragment"
         android:name="com.example.beautystop.view.OrderFragment"
-        android:label="OrderFragment" />
+        android:label="OrderFragment" >
+        <action
+            android:id="@+id/action_ConfirmationFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment" />
+    </fragment>
     <fragment
         android:id="@+id/ordersFragment"
         android:name="com.example.beautystop.view.OrdersFragment"

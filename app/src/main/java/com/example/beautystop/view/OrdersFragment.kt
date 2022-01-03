@@ -23,5 +23,4 @@ class OrdersFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_orders, container, false)
     }
 
-
 }

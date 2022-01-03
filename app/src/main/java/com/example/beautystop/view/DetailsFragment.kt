@@ -20,12 +20,12 @@ import com.example.beautystop.R
 import com.example.beautystop.models.ShoppingBagModel
 
 private const val TAG = "DetailsFragment"
+
 class DetailsFragment() : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
     private lateinit var makeupModel: MakeupModel
     private val productViewModel: ProductsListViewModel by activityViewModels()
     private val detailsViewModel: DetailsViewModel by activityViewModels()
-
 
 
     override fun onCreateView(
@@ -47,34 +47,29 @@ class DetailsFragment() : Fragment() {
 
             var counter = 1
 
-
-          binding.detailsPlusButton.setOnClickListener{
-              counter++
-              binding.detailsAmountTextview.text = counter.toString()
-          }
-            binding.detailsMinusButton.setOnClickListener{
-                if( binding.detailsAmountTextview.text != "0") {
+            binding.detailsPlusButton.setOnClickListener {
+                counter++
+                binding.detailsAmountTextview.text = counter.toString()
+            }
+            binding.detailsMinusButton.setOnClickListener {
+                if (binding.detailsAmountTextview.text != "0") {
                     counter--
                     binding.detailsAmountTextview.text = counter.toString()
                 }
             }
 
-
-
-            if(value.price == "0.0"){
+            if (value.price == "0.0") {
                 binding.price.text = "30 USD"
-            } else{
+            } else {
 
                 binding.price.text = "${value.price} USD"
             }
-
-
 
             binding.website.setOnClickListener() {
                 try {
                     val myIntent =
                         Intent(Intent.ACTION_VIEW, Uri.parse(value.productLink.toString()))
-                                startActivity(myIntent)
+                    startActivity(myIntent)
                 } catch (e: ActivityNotFoundException) {
 
                     Toast.makeText(
@@ -85,34 +80,32 @@ class DetailsFragment() : Fragment() {
                     e.printStackTrace()
                 }
             }
-
-
             makeupModel = value
 
-            Log.d(TAG,makeupModel.toString())
+            Log.d(TAG, makeupModel.toString())
         })
 
         binding.favoriteToggleButton.setOnClickListener {
-            Toast.makeText(requireContext(), "product added to your wishlist", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "product added to your wishlist", Toast.LENGTH_SHORT)
+                .show()
 
-            if(binding.favoriteToggleButton.isChecked){
+            if (binding.favoriteToggleButton.isChecked) {
                 productViewModel.addToWishlist(makeupModel)
             }
-
-
         }
 
-        binding.addtoCartButton.setOnClickListener{
-            Toast.makeText(requireContext(), "product added to your shopping bag", Toast.LENGTH_SHORT).show()
-            detailsViewModel.addToShoppingBag(makeupModel,binding.detailsAmountTextview.text.toString().toInt())
+        binding.addtoCartButton.setOnClickListener {
+            Toast.makeText(requireContext(),
+                "product added to your shopping bag",
+                Toast.LENGTH_SHORT).show()
+            detailsViewModel.addToShoppingBag(makeupModel,
+                binding.detailsAmountTextview.text.toString().toInt())
         }
-
-
     }
 
-    fun observers(){
+    fun observers() {
 
-        detailsViewModel.makeupProductsLiveData.observe(viewLifecycleOwner,{
+        detailsViewModel.makeupProductsLiveData.observe(viewLifecycleOwner, {
             it?.let {
 
 //                binding.listProgressBar.animate().alpha(0f)
@@ -122,12 +115,9 @@ class DetailsFragment() : Fragment() {
         })
 
         detailsViewModel.makeupProductsErrorLiveData.observe(viewLifecycleOwner, {
-            it?.let{
+            it?.let {
                 Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
             }
         })
     }
-
-
-
 }

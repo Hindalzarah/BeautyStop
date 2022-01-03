@@ -12,7 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 private const val TAG = "DetailsViewModel"
-class DetailsViewModel: ViewModel() {
+
+class DetailsViewModel : ViewModel() {
 
     private val apiWish_ShoppingBag = WishlistApiServiceRepository.get()
     val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
@@ -20,21 +21,19 @@ class DetailsViewModel: ViewModel() {
     val makeupProductsErrorLiveData = MutableLiveData<String>()
 
 
-    fun addToShoppingBag(shoppingBagModel: MakeupModel,quantity: Int) {
+    fun addToShoppingBag(shoppingBagModel: MakeupModel, quantity: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
 
-                val response = apiWish_ShoppingBag.addToShoppingCart(ShoppingBagModel(shoppingBagModel.imageLink!!,
-                    shoppingBagModel.imageLink,
-                    shoppingBagModel.name!!,
-                    (shoppingBagModel.price!!.toDouble()*quantity),quantity,userId))
+                val response =
+                    apiWish_ShoppingBag.addToShoppingCart(ShoppingBagModel(shoppingBagModel.imageLink!!,
+                        shoppingBagModel.imageLink,
+                        shoppingBagModel.name!!,
+                        (shoppingBagModel.price!!.toDouble() * quantity), quantity, userId))
                 if (response.isSuccessful) {
-
-
                     Log.d(TAG, this.toString())
 
                     //using the livedata to pass the response to the view
-
 
                 } else {
                     Log.d(TAG, response.message())

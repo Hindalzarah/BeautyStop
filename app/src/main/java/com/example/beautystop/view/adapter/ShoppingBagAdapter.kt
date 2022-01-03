@@ -27,15 +27,12 @@ class ShoppingBagAdapter(var list: MutableList<ShoppingBagModel>, val viewModel:
             )
         )
     }
-
     override fun onBindViewHolder(holder: CartHolder, position: Int) {
         val item = list[position]
 
         holder.productName.text = item.name
         holder.productPrice.text = item.price.toString()
        Glide.with(context).load(item.image).into(holder.productImage)
-
-
        Glide.with(context).load(item.image).into(holder.productImage)
         holder.productName.text = item.name
         if(item.price != 0.0){
@@ -44,17 +41,11 @@ class ShoppingBagAdapter(var list: MutableList<ShoppingBagModel>, val viewModel:
             holder.productPrice.text = "30.0 USD"
         }
         holder.quantity.text = "Quantity: ${item.quantity}"
-
-
         holder.deleteButton.setOnClickListener{
             list.remove(item)
             notifyDataSetChanged()
             viewModel.deleteFromShoppingBag(item.id)
-
         }
-
-
-
     }
 
     override fun getItemCount(): Int {

@@ -19,10 +19,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-
-
-
-
         object: CountDownTimer(2000,1000) {
             override fun onTick(millisUntilFinished: Long) {
 
@@ -42,12 +38,9 @@ class SplashActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
-
             }
 
-
         }.start()
-
 
     }
 }

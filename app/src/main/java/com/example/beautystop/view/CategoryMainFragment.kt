@@ -33,7 +33,6 @@ class CategoryMainFragment : Fragment() {
         binding = FragmentCategoryMainBinding.inflate(inflater, container, false)
         return binding.root
 
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +49,6 @@ class CategoryMainFragment : Fragment() {
                 bundle)
         }
 
-
         //if user clicked on lips CardView
         binding.lipsCardview.setOnClickListener {
             bundle.putString("Type", "Lips")
@@ -63,7 +61,6 @@ class CategoryMainFragment : Fragment() {
             findNavController().navigate(R.id.action_categoryMainFragment_to_productsListFragment,
                 bundle)
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -75,14 +72,15 @@ class CategoryMainFragment : Fragment() {
 
         logout.setOnMenuItemClickListener {
 
-            sharedPref = requireActivity().getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
+            sharedPref =
+                requireActivity().getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
             sharedPrefEditor = sharedPref.edit()
             sharedPrefEditor.putBoolean("isLogged?", false)
             sharedPrefEditor.commit()
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(requireActivity(), LoginActivity::class.java))
             requireActivity().finish()
-true
+            true
         }
 
         orders.setOnMenuItemClickListener {
@@ -92,27 +90,19 @@ true
         }
 
         var search = menu.findItem(R.id.app_bar_search).setVisible(false)
-
-
-
-
-
     }
-
-
-
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.shoppingCartFragment -> {
                 findNavController().navigate(R.id.shoppingCartFragment)
 
             }
         }
 
-     return super.onOptionsItemSelected(item)
+        return super.onOptionsItemSelected(item)
 
 
     }

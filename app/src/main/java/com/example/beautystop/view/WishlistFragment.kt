@@ -29,36 +29,17 @@ class WishlistFragment : Fragment() {
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         observrs()
-
         wishlistAdapter = WishlistAdapter(wishlistViewModel)
-
         binding.wishlistRecyclerview.adapter = wishlistAdapter
-
-
         wishlistViewModel.callWishlist()
 
-
     }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return super.onOptionsItemSelected(item)
-////
-////        when (item.itemId) {
-////            R.id.Wishlist_fragment -> {
-////                findNavController().navigate(R.id.shoppingCartFragment)
-////
-////            }
-////
-////
-////    }
-//        }
-
-
 
 
     fun observrs() {
@@ -80,8 +61,5 @@ class WishlistFragment : Fragment() {
                 Toast.makeText(requireActivity(), "$it wish", Toast.LENGTH_SHORT).show()
             }
         })
-
-
-
     }
 }

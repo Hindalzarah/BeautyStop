@@ -26,7 +26,6 @@ lateinit var notificationManager: NotificationManager
 
 class OrderFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -34,7 +33,6 @@ class OrderFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_comfirmation, container, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,18 +45,14 @@ class OrderFragment : Fragment() {
         var email = FirebaseAuth.getInstance().currentUser!!.email!!
         var index = email.indexOf('@');
         email = email.substring(0, index)
-
         customerRecognition.text = email
-
         val orderDetailsButton: Button = view.findViewById(R.id.order_details_button)
 
 
-        orderDetailsButton.setOnClickListener{
+        orderDetailsButton.setOnClickListener {
 
-            findNavController().navigate(R.id.action_shoppingCartFragment_to_orderFragment)
-
+            findNavController().navigate(R.id.action_ConfirmationFragment_to_ordersFragment)
         }
-
     }
 
     fun notification() {

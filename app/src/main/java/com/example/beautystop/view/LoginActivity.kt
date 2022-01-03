@@ -69,9 +69,9 @@ class LoginActivity : AppCompatActivity() {
                                 task.exception!!.message.toString(),
                                 Toast.LENGTH_SHORT).show()
                         }
+
                     }
             }
         }
-
     }
 }

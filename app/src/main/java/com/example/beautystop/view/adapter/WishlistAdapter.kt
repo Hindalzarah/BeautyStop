@@ -16,6 +16,7 @@ import com.google.android.material.tabs.TabLayout
 import com.squareup.picasso.Picasso
 
 private const val TAG = "WishlistAdapter"
+
 class WishlistAdapter(val viewModel: WishlistViewModel) :
 
     RecyclerView.Adapter<WishlistAdapter.FavoritesHolder>() {
@@ -25,30 +26,25 @@ class WishlistAdapter(val viewModel: WishlistViewModel) :
             return oldItem.id == newItem.id
         }
 
-
-    override fun areContentsTheSame(oldItem: WishlistModel, newItem: WishlistModel): Boolean {
-        return oldItem == newItem
+        override fun areContentsTheSame(oldItem: WishlistModel, newItem: WishlistModel): Boolean {
+            return oldItem == newItem
+        }
     }
-}
 
-
-    val differ = AsyncListDiffer(this,DIFF_CALLBACK)
+    val differ = AsyncListDiffer(this, DIFF_CALLBACK)
 
     fun submitList(list: List<WishlistModel>) {
         differ.submitList(list)
     }
-
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
     ): FavoritesHolder {
 
-
-        val binding = WishlistItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding =
+            WishlistItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FavoritesHolder(binding)
-
-
     }
 
     override fun onBindViewHolder(holder: FavoritesHolder, position: Int) {
@@ -68,11 +64,10 @@ class WishlistAdapter(val viewModel: WishlistViewModel) :
             //submitting it to the function
             viewModel.deleteFromWishlist(item.id)
             differ.submitList(wishlist)
-
         }
 
         var counter = item.quantity
-        holder.plus.setOnClickListener{
+        holder.plus.setOnClickListener {
 
             Log.d(TAG, counter.toString())
             counter++
@@ -82,10 +77,8 @@ class WishlistAdapter(val viewModel: WishlistViewModel) :
             viewModel.editFromWishlist(item)
         }
 
-
-        holder.minus.setOnClickListener{
-            if(item.quantity > 0) {
-
+        holder.minus.setOnClickListener {
+            if (item.quantity > 0) {
 
                 counter--
                 holder.amount.text = counter.toString()
@@ -94,14 +87,14 @@ class WishlistAdapter(val viewModel: WishlistViewModel) :
             item.quantity = counter
             viewModel.editFromWishlist(item)
         }
-
     }
 
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
 
-    class FavoritesHolder(val binding: WishlistItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+    class FavoritesHolder(val binding: WishlistItemLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         val delete = binding.deleteButton
         val plus = binding.plusButton
@@ -109,18 +102,14 @@ class WishlistAdapter(val viewModel: WishlistViewModel) :
         val amount = binding.amountTextview
         fun bind(item: WishlistModel) {
 
-
             //setting values for the views using the model
             Picasso.get().load(item.image).into(binding.favoritesImageview)
             binding.productNameWishlistTv.text = item.name
             binding.amountTextview.text = item.quantity.toString()
 
             binding.wishlistCardview.setOnClickListener {
-              TODO()
+                TODO()
             }
-            }
-
-
-
         }
     }
+}

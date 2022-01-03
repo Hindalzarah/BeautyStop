@@ -27,6 +27,7 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -90,4 +91,16 @@ dependencies {
 
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
     implementation "androidx.core:core-ktx:'1.6.0'"
+
+    // Material Components for Android
+    implementation 'com.google.android.material:material:1.2.1'
+
+    implementation 'org.imaginativeworld.oopsnointernet:oopsnointernet:2.0.0'
+    //  price range
+    implementation "com.github.stfalcon-studio:StfalconPriceRangeBar-android:[latest_version]"
+    implementation 'com.github.stfalcon:StfalconPriceRangeBar:0.1.0'
+
+    implementation "com.google.android.material:material:1.4.0"
+    //recycler view shimmer effect load
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 }

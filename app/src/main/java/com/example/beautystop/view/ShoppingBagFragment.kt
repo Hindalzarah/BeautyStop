@@ -9,11 +9,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.isEmpty
 import androidx.core.view.isNotEmpty
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beautystop.R
@@ -40,20 +38,14 @@ class ShoppingBagFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-
         observers()
         recyclerView = view.findViewById(R.id.cart_recyclerciew)
-
         Log.d("ShoppingFragment", model.toString())
         adapter = ShoppingBagAdapter(model, viewModel, requireContext())
         recyclerView.adapter = adapter
         viewModel.callShoppingBag()
         emptyTextView = view.findViewById(R.id.empty_shoppingbag_tv)
-
         orderButton = view.findViewById(R.id.order_button)
-
         orderButton.setOnClickListener {
 
             if (recyclerView.isNotEmpty()) {
@@ -61,22 +53,17 @@ class ShoppingBagFragment : Fragment() {
             } else {
                 Toast.makeText(requireContext(), "your bag is empty :(", Toast.LENGTH_SHORT).show()
             }
-
             adapter.list.clear()
             adapter.list.removeAll(model)
             adapter.notifyDataSetChanged()
             model.forEach {
                 viewModel.deleteFromShoppingBag(it.id)
             }
-
         }
-
     }
-
 
     fun observers() {
         viewModel.shoppingBagLiveData.observe(viewLifecycleOwner, {
-
 
             it?.let {
                 model = it.toMutableList()
@@ -86,9 +73,7 @@ class ShoppingBagFragment : Fragment() {
                 Log.d("ShoppingFragment", it.toString())
 
                 adapter.notifyDataSetChanged()
-
             }
-
 
             if (it.isEmpty()) {
                 emptyTextView.isVisible = true
@@ -98,8 +83,6 @@ class ShoppingBagFragment : Fragment() {
                 emptyTextView.isVisible = false
                 orderButton.isVisible = true
             }
-
-
         })
 
         viewModel.shoppingBagErrorLiveData.observe(viewLifecycleOwner, {

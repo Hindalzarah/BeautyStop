@@ -25,7 +25,6 @@ class ProductsAdapter(val productViewModel: ProductsListViewModel, val context: 
         override fun areContentsTheSame(oldItem: MakeupModel, newItem: MakeupModel): Boolean {
             return oldItem == newItem
         }
-
     }
 
     private val differ = AsyncListDiffer(this, DIFF_CALLBACK)
@@ -33,8 +32,6 @@ class ProductsAdapter(val productViewModel: ProductsListViewModel, val context: 
     fun submitList(list: List<MakeupModel>) {
         differ.submitList(list)
     }
-
-
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -58,30 +55,21 @@ class ProductsAdapter(val productViewModel: ProductsListViewModel, val context: 
         return differ.currentList.size
     }
 
-
     class ProductsHolder(val binding: ProductsItemLayoutBinding, val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: MakeupModel, productViewModel: ProductsListViewModel) {
-
             Glide.with(context).load(item.imageLink).placeholder(R.drawable.splash)
                 .into(binding.imageView)
 
             binding.listBrand.text = item.brand
             binding.listName.text = item.name
-
-
-
             binding.imageView.setOnClickListener() {
-
 
                 productViewModel.selectItem.postValue(item)
                 it.findNavController().navigate(R.id.action_productsListFragment_to_detailsFragment)
 
-
             }
         }
     }
-
-
 }

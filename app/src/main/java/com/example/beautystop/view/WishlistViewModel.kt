@@ -26,8 +26,6 @@ class WishlistViewModel: ViewModel() {
     val deleteWishlistLiveData = MutableLiveData<String>()
     val editWishlistLiveData = MutableLiveData<String>()
 
-
-
     fun callWishlist() {
         viewModelScope.launch(Dispatchers.IO) {
 
@@ -91,8 +89,6 @@ class WishlistViewModel: ViewModel() {
         }
     }
 
-
-
     fun editFromWishlist(wishlistBody: WishlistModel){
 
         viewModelScope.launch (Dispatchers.IO){
@@ -116,3 +112,10 @@ class WishlistViewModel: ViewModel() {
         }
     }
 }
+
+
+
+
+
+
+

@@ -30,4 +30,11 @@
     <string name="empty">your bag is empty. \n 💌 add products to your shopping bag.</string>
     <string name="required">required</string>
     <string name="order_details">order details</string>
+
+
+    <string-array name="rangeSliderValues">
+        <item>20</item>
+        <item>70</item>
+    </string-array>
+
 </resources>

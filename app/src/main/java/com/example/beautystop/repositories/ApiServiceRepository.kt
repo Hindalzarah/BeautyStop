@@ -8,7 +8,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 private const val BASE_URL = "http://makeup-api.herokuapp.com"
-class ApiServiceRepository(val context: Context)  {
+
+class ApiServiceRepository(val context: Context) {
 
     private val retrofitService = Retrofit.Builder()
         .baseUrl(BASE_URL)
@@ -18,13 +19,7 @@ class ApiServiceRepository(val context: Context)  {
 
     suspend fun getPhotos(product_type: String) =
         retrofitApi.getProducts(product_type)
-    suspend fun searchBrand(brand:String) = retrofitApi.searchBrand(brand)
-
-//    suspend fun getWishlist(id:String) = retrofitApi.getWishlist()
-//    suspend fun addToWishlist(wishlistBody:WishlistModel) = retrofitApi.addToWishlist(wishlistBody)
-//    suspend fun deleteFromWishlist(id:String) = retrofitApi.deleteFromWishlist(id)
-//    suspend fun editWishlist(id:String,wishlistBody: WishlistModel) = retrofitApi.editWishlist(id,wishlistBody)
-
+    suspend fun searchBrand(brand: String) = retrofitApi.searchBrand(brand)
 
     // to initialize and get the repository we use the companion object
     //singleton (single object)

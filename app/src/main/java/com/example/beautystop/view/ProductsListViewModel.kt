@@ -125,7 +125,6 @@ class ProductsListViewModel : ViewModel() {
 
                 Log.d(TAG, e.message.toString())
                 makeupProductsErrorLiveData.postValue(e.message.toString())
-
             }
         }
     }
