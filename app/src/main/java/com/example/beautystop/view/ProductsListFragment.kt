@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -75,6 +76,7 @@ class ProductsListFragment : Fragment() {
             }
         })
 
+
         Log.d("productlistFragment", "`test")
 
 
@@ -92,8 +94,8 @@ class ProductsListFragment : Fragment() {
                 "Lips" -> productsListViewModel.callMakeupProducts("lipstick")
             }
         }
-        binding.productslistRecyclerview
-
+        binding.productslistRecyclerview.isVisible=false
+        binding.shimmerLayout.startShimmerAnimation()
     }
 
 
@@ -103,7 +105,9 @@ class ProductsListFragment : Fragment() {
 
                 productsListAdapter.submitList(it)
                 allProducts = it
-                binding.listProgressBar.animate().alpha(0f)
+//                binding.listProgressBar.animate().alpha(0f)
+                binding.shimmerLayout.stopShimmerAnimation()
+                binding.productslistRecyclerview.isVisible=true
 
                 productsListViewModel.makeupProductsLiveData.postValue(null)
             }
@@ -187,6 +191,10 @@ class ProductsListFragment : Fragment() {
         when (item.itemId) {
             R.id.shoppingCartFragment -> {
                 findNavController().navigate(R.id.action_productsListFragment_to_shoppingCartFragment)
+            }
+            R.id.filterFragment -> {
+                val bottomsheet = FilterFragment()
+                bottomsheet.show(requireActivity().supportFragmentManager,"")
             }
         }
         return super.onOptionsItemSelected(item)

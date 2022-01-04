@@ -15,6 +15,11 @@
     android:title="Search"
     app:showAsAction="always|collapseActionView"
     app:actionViewClass="androidx.appcompat.widget.SearchView" />
+    <item
+        android:id="@+id/filterFragment"
+        android:icon="@drawable/ic_baseline_tune_24"
+        android:title="filter"
+        app:showAsAction="always" />
 
 
 </menu>

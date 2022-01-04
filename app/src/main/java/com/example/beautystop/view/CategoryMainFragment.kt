@@ -89,9 +89,9 @@ class CategoryMainFragment : Fragment() {
             true
         }
 
-        var search = menu.findItem(R.id.app_bar_search).setVisible(false)
+        menu.findItem(R.id.app_bar_search).isVisible = false
+        menu.findItem(R.id.filterFragment).isVisible = false
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 

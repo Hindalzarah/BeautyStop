@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     //    lateinit var connectionLiveData: ConnectionLiveData
     private var noInternetSnackbar: NoInternetDialogSignal? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
