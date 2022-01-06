@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.beautystop.models.MakeupModel
+import com.example.beautystop.models.PriceRangeModel
 import com.example.beautystop.models.ShoppingBagModel
 import com.example.beautystop.models.WishlistModel
 import com.example.beautystop.repositories.ApiServiceRepository
@@ -24,6 +25,7 @@ class ProductsListViewModel : ViewModel() {
     val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
     val makeupProductsLiveData = MutableLiveData<List<MakeupModel>>()
     val makeupProductsErrorLiveData = MutableLiveData<String>()
+    val priceRangeLiveData = MutableLiveData<PriceRangeModel>()
 
 
     //paging lists

@@ -64,6 +64,13 @@ class ProductsAdapter(val productViewModel: ProductsListViewModel, val context: 
 
             binding.listBrand.text = item.brand
             binding.listName.text = item.name
+            if (item.price == "0.0"){
+                binding.priceTv.text = "15USD"
+            } else {
+                binding.priceTv.text = "${item.price}USD"
+            }
+
+
             binding.imageView.setOnClickListener() {
 
                 productViewModel.selectItem.postValue(item)

@@ -1,4 +1,5 @@
 package com.example.beautystop.view.adapter
+
 import android.content.Context
 import android.content.Intent
 import androidx.recyclerview.widget.RecyclerView
@@ -16,9 +17,16 @@ import com.example.beautystop.models.ShoppingBagModel
 import com.example.beautystop.view.ShoppingBagViewModel
 
 
-class ShoppingBagAdapter(var list: MutableList<ShoppingBagModel>, val viewModel: ShoppingBagViewModel, val context: Context) :
+class ShoppingBagAdapter(
+    var list: MutableList<ShoppingBagModel>,
+    val viewModel: ShoppingBagViewModel,
+    val context: Context,
+) :
     RecyclerView.Adapter<ShoppingBagAdapter.CartHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingBagAdapter.CartHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ShoppingBagAdapter.CartHolder {
         return CartHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.shopping_bag_item_layout,
@@ -27,21 +35,22 @@ class ShoppingBagAdapter(var list: MutableList<ShoppingBagModel>, val viewModel:
             )
         )
     }
+
     override fun onBindViewHolder(holder: CartHolder, position: Int) {
         val item = list[position]
 
         holder.productName.text = item.name
         holder.productPrice.text = item.price.toString()
-       Glide.with(context).load(item.image).into(holder.productImage)
-       Glide.with(context).load(item.image).into(holder.productImage)
+        Glide.with(context).load(item.image).into(holder.productImage)
+        Glide.with(context).load(item.image).into(holder.productImage)
         holder.productName.text = item.name
-        if(item.price != 0.0){
+        if (item.price != 0.0) {
             holder.productPrice.text = "${item.price} USD"
         } else {
             holder.productPrice.text = "30.0 USD"
         }
         holder.quantity.text = "Quantity: ${item.quantity}"
-        holder.deleteButton.setOnClickListener{
+        holder.deleteButton.setOnClickListener {
             list.remove(item)
             notifyDataSetChanged()
             viewModel.deleteFromShoppingBag(item.id)

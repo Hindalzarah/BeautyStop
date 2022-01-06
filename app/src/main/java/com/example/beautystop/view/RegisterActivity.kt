@@ -35,12 +35,11 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.registerButton.setOnClickListener { submitForm() }
 
-        val emailAddress: TextInputEditText =  findViewById(R.id.emailAddress_EditText)
+        val emailAddress: TextInputEditText = findViewById(R.id.emailAddress_EditText)
         val password: EditText = findViewById(R.id.password_EditText)
         val registerButton: Button = findViewById(R.id.register_button)
         val loginTextView: TextView = findViewById(R.id.login_TextView)
         emailContainer = findViewById(R.id.emailContainer)
-
 
 
         loginTextView.setOnClickListener() {
@@ -60,8 +59,12 @@ class RegisterActivity : AppCompatActivity() {
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     val firebaseuser: FirebaseUser = task.result!!.user!!
-                                    Toast.makeText(this, "Registered Successfully", Toast.LENGTH_SHORT).apply {setGravity(
-                                        Gravity.TOP, 0, 0); show() }
+                                    Toast.makeText(this,
+                                        "Registered Successfully",
+                                        Toast.LENGTH_SHORT).apply {
+                                        setGravity(
+                                            Gravity.TOP, 0, 0); show()
+                                    }
 
                                     val intent = Intent(this, LoginActivity::class.java)
                                     intent.putExtra("UserId", firebaseuser.uid)
@@ -74,15 +77,16 @@ class RegisterActivity : AppCompatActivity() {
                                         Toast.LENGTH_SHORT).show()
                                 }
                             }
-
-//                        registerViewModel.register(firstName,lastName,email,password)
                     } else
-                        Toast.makeText(this, "Make sure your password is strong.", Toast.LENGTH_SHORT)
-                            .apply {setGravity(Gravity.TOP, 0, 0); show() }
+                        Toast.makeText(this,
+                            "Make sure your password is strong.",
+                            Toast.LENGTH_SHORT)
+                            .apply { setGravity(Gravity.TOP, 0, 0); show() }
                 } else
-                    Toast.makeText(this, "Make sure you typed your email address correctly.", Toast.LENGTH_SHORT)
-                        .apply {setGravity(Gravity.TOP, 0, 0); show() }
-
+                    Toast.makeText(this,
+                        "Make sure you typed your email address correctly.",
+                        Toast.LENGTH_SHORT)
+                        .apply { setGravity(Gravity.TOP, 0, 0); show() }
             }
         }
     }
@@ -95,28 +99,22 @@ class RegisterActivity : AppCompatActivity() {
         val validEmail = binding.emailContainer.helperText == null
         val validPassword = binding.passwordContainer.helperText == null
 
-
-        if (validEmail && validPassword)
-            resetForm()
-        else
-            invalidForm()
+        if (validEmail && validPassword) resetForm() else invalidForm()
     }
 
     private fun invalidForm() {
         var message = ""
-        if(binding.emailContainer.helperText != null)
+        if (binding.emailContainer.helperText != null)
             message += "\n\nEmail: " + binding.emailContainer.helperText
-        if(binding.passwordContainer.helperText != null)
+        if (binding.passwordContainer.helperText != null)
             message += "\n\nPassword: " + binding.passwordContainer.helperText
-
 
         AlertDialog.Builder(this)
             .setTitle("Invalid Form")
             .setMessage(message)
-            .setPositiveButton("Okay"){ _,_ ->
+            .setPositiveButton("Okay") { _, _ ->
                 // do nothing
-            }
-            .show()
+            }.show()
     }
 
     private fun resetForm() {
@@ -126,41 +124,34 @@ class RegisterActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("Form submitted")
             .setMessage(message)
-            .setPositiveButton("Okay"){ _,_ ->
+            .setPositiveButton("Okay") { _, _ ->
                 binding.emailAddressEditText.text = null
                 binding.passwordEditText.text = null
-
-
                 binding.emailContainer.helperText = getString(R.string.required)
                 binding.passwordContainer.helperText = getString(R.string.required)
-
-            }
-            .show()
+            }.show()
     }
 
     private fun emailFocusListener() {
         binding.emailAddressEditText.setOnFocusChangeListener { _, focused ->
-            if(!focused)
-            {
-               emailContainer.helperText = validEmail()
+            if (!focused) {
+                emailContainer.helperText = validEmail()
             }
         }
     }
 
     private fun validEmail(): String? {
 
-        val emailText =  binding.emailAddressEditText.text.toString()
-        if(!Patterns.EMAIL_ADDRESS.matcher(emailText).matches())
-        {
+        val emailText = binding.emailAddressEditText.text.toString()
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
             return "Invalid Email Address"
         }
-        return  null
+        return null
     }
 
     private fun passwordFocusListener() {
         binding.passwordEditText.setOnFocusChangeListener { _, focused ->
-            if(!focused)
-            {
+            if (!focused) {
                 binding.passwordContainer.helperText = validPassword()
             }
         }
@@ -168,25 +159,20 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun validPassword(): String? {
 
-        val passwordText =  binding.passwordEditText.text.toString()
+        val passwordText = binding.passwordEditText.text.toString()
 
-        if(passwordText.length > 8 ){
-
+        if (passwordText.length > 8) {
             return "Password must have at least 8 Characters"
         }
-        if(!passwordText.matches(".*[a-z].*".toRegex()))
-        {
+        if (!passwordText.matches(".*[a-z].*".toRegex())) {
             return "Password must contain at least one Lower-Case Character"
         }
-        if(!passwordText.matches(".*[@#\$%^&+=].*".toRegex()))
-        {
+        if (!passwordText.matches(".*[@#\$%^&+=].*".toRegex())) {
             return "Password must contain at least one special Character (@#\$%^&+=)"
         }
-        if(!passwordText.matches(".*[A-Z].*".toRegex()))
-        {
+        if (!passwordText.matches(".*[A-Z].*".toRegex())) {
             return "Password must contain at least one Upper-Case Character"
         }
-
-        return  null
+        return null
     }
 }

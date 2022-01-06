@@ -29,8 +29,6 @@ class WishlistFragment : Fragment() {
         return binding.root
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -41,7 +39,6 @@ class WishlistFragment : Fragment() {
 
     }
 
-
     fun observrs() {
 
         wishlistViewModel.wishlistLiveData.observe(viewLifecycleOwner, Observer {
@@ -49,15 +46,15 @@ class WishlistFragment : Fragment() {
 
             binding.favoritesProgressBar.animate().alpha(0f)
 
-            if(it.isEmpty()){
+            if (it.isEmpty()) {
                 binding.emptyWishlistTv.isVisible = true
-            } else{
+            } else {
                 binding.emptyWishlistTv.isVisible = false
             }
         })
 
         wishlistViewModel.wishlistErrorLiveData.observe(viewLifecycleOwner, Observer {
-            it?.let{
+            it?.let {
                 Toast.makeText(requireActivity(), "$it wish", Toast.LENGTH_SHORT).show()
             }
         })

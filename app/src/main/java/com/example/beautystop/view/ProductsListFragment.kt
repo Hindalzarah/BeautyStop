@@ -18,6 +18,7 @@ import com.example.beautystop.view.adapter.ProductsAdapter
 import com.google.firebase.auth.FirebaseAuth
 
 import java.lang.Exception
+import java.lang.NullPointerException
 
 private const val TAG = "ProductsListFragment"
 
@@ -105,7 +106,6 @@ class ProductsListFragment : Fragment() {
 
                 productsListAdapter.submitList(it)
                 allProducts = it
-//                binding.listProgressBar.animate().alpha(0f)
                 binding.shimmerLayout.stopShimmerAnimation()
                 binding.productslistRecyclerview.isVisible=true
 
@@ -117,6 +117,22 @@ class ProductsListFragment : Fragment() {
                 Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
             }
         })
+
+        productsListViewModel.priceRangeLiveData.observe(viewLifecycleOwner,{
+            it?.let{ range ->
+
+                    Log.d(TAG,range.toString())
+
+                productsListAdapter.submitList( allProducts.filter{
+                   try {
+                       it.price!!.toFloat() < range.right && it.price!!.toFloat() > range.left
+                   } catch (e:NullPointerException){
+                       true
+                   }
+                })
+
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -124,7 +140,6 @@ class ProductsListFragment : Fragment() {
 
         val searchItem = menu.findItem(R.id.app_bar_search)
         val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
-//        val bag = menu.findItem(R.id.action_productsListFragment_to_shoppingCartFragment)
 
         val logout = menu.findItem(R.id.logout)
         val orders = menu.findItem(R.id.ordersFragment)
@@ -182,7 +197,6 @@ class ProductsListFragment : Fragment() {
                 productsListAdapter.submitList(allProducts)
                 return true
             }
-
         })
     }
 

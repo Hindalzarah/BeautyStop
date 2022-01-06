@@ -20,8 +20,9 @@ class RegistrationValidation {
 
         return matcher.matches()
     }
+
     // To check if the password is valid or not
-    fun passwordIsValid(password: String) : Boolean {
+    fun passwordIsValid(password: String): Boolean {
         val pattern = Pattern.compile(REGEX_PASSWORD)
         val matcher = pattern.matcher(password)
 

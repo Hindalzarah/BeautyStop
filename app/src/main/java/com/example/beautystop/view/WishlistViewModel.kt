@@ -16,10 +16,10 @@ import java.lang.Exception
 
 
 private const val TAG = "WishlistViewModel"
-class WishlistViewModel: ViewModel() {
+
+class WishlistViewModel : ViewModel() {
 
     private val apiRepo = WishlistApiServiceRepository.get()
-
     val id: String = ""
     val wishlistLiveData = MutableLiveData<List<WishlistModel>>()
     val wishlistErrorLiveData = MutableLiveData<String>()
@@ -31,83 +31,81 @@ class WishlistViewModel: ViewModel() {
 
             //sending request and trying to get a response
             try {
-                Log.d(TAG,"in try")
+                Log.d(TAG, "in try")
 
                 //we need the user id to get the wishlist so we get the user id from the firebase
                 val response = apiRepo.getWishlist(FirebaseAuth.getInstance().currentUser!!.uid)
                 //if sucessful
                 if (response.isSuccessful) {
-                    Log.d(TAG,"in if condition")
-                    Log.d(TAG,response.toString())
+                    Log.d(TAG, "in if condition")
+                    Log.d(TAG, response.toString())
 
                     response.body()?.run {
                         //submitting the response in the livedata
                         wishlistLiveData.postValue(this)
-                        Log.d(TAG,this.toString())
+                        Log.d(TAG, this.toString())
                     }
                 } else {
                     //if unsuccessful
-                    Log.d(TAG,response.toString())
-                    Log.d(TAG,"in else condition")
+                    Log.d(TAG, response.toString())
+                    Log.d(TAG, "in else condition")
 
-                    Log.d(TAG,response.message())
+                    Log.d(TAG, response.message())
                     //submitting the response in the error livedata
                     wishlistErrorLiveData.postValue(response.message())
                 }
 
             } catch (e: Exception) {
-                Log.d(TAG,"in catch")
+                Log.d(TAG, "in catch")
 
-                Log.d(TAG,e.message.toString())
+                Log.d(TAG, e.message.toString())
                 wishlistErrorLiveData.postValue(e.message.toString())
             }
         }
 
     }
 
-
-    fun deleteFromWishlist(id:String){
+    fun deleteFromWishlist(id: String) {
 
         viewModelScope.launch(Dispatchers.IO) {
 
-            try{
+            try {
                 val response = apiRepo.deleteFromWishlist(id)
 
                 if (response.isSuccessful) {
-                        deleteWishlistLiveData.postValue("successful")
-                        Log.d(TAG,this.toString())
+                    deleteWishlistLiveData.postValue("successful")
+                    Log.d(TAG, this.toString())
 
                 } else {
-                    Log.d(TAG,response.message())
+                    Log.d(TAG, response.message())
                     wishlistErrorLiveData.postValue(response.message())
                 }
             } catch (e: Exception) {
-                Log.d(TAG,e.message.toString())
+                Log.d(TAG, e.message.toString())
                 wishlistErrorLiveData.postValue(e.message.toString())
 
             }
         }
     }
 
-    fun editFromWishlist(wishlistBody: WishlistModel){
+    fun editFromWishlist(wishlistBody: WishlistModel) {
 
-        viewModelScope.launch (Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
 
-            Log.d(TAG,wishlistBody.toString())
-            try{
-                val response = apiRepo.editWishlist(wishlistBody.id,wishlistBody)
+            Log.d(TAG, wishlistBody.toString())
+            try {
+                val response = apiRepo.editWishlist(wishlistBody.id, wishlistBody)
                 if (response.isSuccessful) {
                     editWishlistLiveData.postValue("successful")
-                    Log.d(TAG,this.toString())
+                    Log.d(TAG, this.toString())
 
                 } else {
-                    Log.d(TAG,response.message())
+                    Log.d(TAG, response.message())
                     wishlistErrorLiveData.postValue(response.message())
                 }
             } catch (e: Exception) {
-                Log.d(TAG,e.message.toString())
+                Log.d(TAG, e.message.toString())
                 wishlistErrorLiveData.postValue(e.message.toString())
-
             }
         }
     }

@@ -19,6 +19,7 @@ class ApiServiceRepository(val context: Context) {
 
     suspend fun getPhotos(product_type: String) =
         retrofitApi.getProducts(product_type)
+
     suspend fun searchBrand(brand: String) = retrofitApi.searchBrand(brand)
 
     // to initialize and get the repository we use the companion object

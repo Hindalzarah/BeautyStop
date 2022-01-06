@@ -21,9 +21,8 @@ class SplashActivity : AppCompatActivity() {
 
         object: CountDownTimer(2000,1000) {
             override fun onTick(millisUntilFinished: Long) {
-
+                //nothing to do here
             }
-
             override fun onFinish() {
                 sharedPref = this@SplashActivity.getSharedPreferences(SHARED_PREF_FILE, Context.MODE_PRIVATE)
                 if (sharedPref.getBoolean("isLogged?", false)){
@@ -39,8 +38,6 @@ class SplashActivity : AppCompatActivity() {
                     finish()
                 }
             }
-
         }.start()
-
     }
 }
