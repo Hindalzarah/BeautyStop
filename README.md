@@ -27,7 +27,14 @@
 * I used android studio and took my figma scetch and transformed it into a deisgn using the android studio xml layout.
 * I started working on my app and I started writing the logic of the app using kotlin langauge. 
 * I used Room for my database 
+* I followed ViewModel Architecture for organized and easy to read code.
 
+<hr>
+
+### Tools
+* I built my app using Android Studio.
+* I used Git & Github to share and manage my code online.
+* I used figma to help me do a scetch of how I want my app to look like.
 
 
 
@@ -48,6 +55,7 @@
 5. As a user, I want to be able to search for a specific brand easily so I don't have to go through all the products.
 6. As a user, I want to be able to sort and filter the products based on the price range so I can be able to customize the price based on my budget.
 7.
+
 
 <hr>
 
@@ -70,4 +78,6 @@
 
 ### Favorite Functions:
 
+* pagination function
+* 
 
