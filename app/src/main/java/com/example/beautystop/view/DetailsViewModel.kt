@@ -20,6 +20,8 @@ class DetailsViewModel : ViewModel() {
     val makeupProductsLiveData = MutableLiveData<List<MakeupModel>>()
     val makeupProductsErrorLiveData = MutableLiveData<String>()
 
+    //for when a specific item is selected to display the details fragment
+    val selectItem = MutableLiveData<MakeupModel>()
 
     fun addToShoppingBag(shoppingBagModel: MakeupModel, quantity: Int) {
         viewModelScope.launch(Dispatchers.IO) {

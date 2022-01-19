@@ -65,9 +65,9 @@ class ProductsAdapter(val productViewModel: ProductsListViewModel, val context: 
             binding.listBrand.text = item.brand
             binding.listName.text = item.name
             if (item.price == "0.0"){
-                binding.priceTv.text = "15USD"
+                binding.priceTv.text = "15$"
             } else {
-                binding.priceTv.text = "${item.price}USD"
+                binding.priceTv.text = "${item.price}$"
             }
 
 

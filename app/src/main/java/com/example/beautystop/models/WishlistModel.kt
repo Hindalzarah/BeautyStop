@@ -16,6 +16,12 @@ data class WishlistModel(
     val userId: String,
     @SerializedName("price")
     val price: String,
+    @SerializedName("product_link")
+    val productLink: String?,
+    @SerializedName("image_link")
+    val imageLink: String?,
+    @SerializedName("brand")
+    val brand: String?,
 
 
 )

@@ -45,9 +45,9 @@ class ShoppingBagAdapter(
         Glide.with(context).load(item.image).into(holder.productImage)
         holder.productName.text = item.name
         if (item.price != 0.0) {
-            holder.productPrice.text = "${item.price} USD"
+            holder.productPrice.text = "${item.price}$"
         } else {
-            holder.productPrice.text = "30.0 USD"
+            holder.productPrice.text =  "15$"
         }
         holder.quantity.text = "Quantity: ${item.quantity}"
         holder.deleteButton.setOnClickListener {

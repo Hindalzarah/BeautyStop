@@ -46,13 +46,10 @@ class OrderFragment : Fragment() {
         var index = email.indexOf('@');
         email = email.substring(0, index)
         customerRecognition.text = email
-        val orderDetailsButton: Button = view.findViewById(R.id.order_details_button)
 
 
-        orderDetailsButton.setOnClickListener {
 
-            findNavController().navigate(R.id.action_ConfirmationFragment_to_ordersFragment)
-        }
+
     }
 
     fun notification() {

@@ -25,7 +25,7 @@
         android:id="@+id/buttom_navigation"
         android:layout_width="409dp"
         android:layout_height="56dp"
-        android:background="@color/bottom_bar"
+        android:background="#DACACA"
         app:itemIconSize="34dp"
         app:itemIconTint="@drawable/selc"
         app:labelVisibilityMode="unlabeled"

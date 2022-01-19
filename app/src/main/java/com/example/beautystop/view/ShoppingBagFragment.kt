@@ -66,13 +66,17 @@ class ShoppingBagFragment : Fragment() {
         viewModel.shoppingBagLiveData.observe(viewLifecycleOwner, {
 
             it?.let {
+
                 model = it.toMutableList()
-                // Log.d("model",model.toString())
+                // clears data from the livedata
+                viewModel.livedata.postValue(null)
                 adapter.list = it.toMutableList()
                 //adapter = ShoppingBagAdapter(it,viewModel,requireContext())
                 Log.d("ShoppingFragment", it.toString())
 
+
                 adapter.notifyDataSetChanged()
+
             }
 
             if (it.isEmpty()) {
@@ -83,6 +87,8 @@ class ShoppingBagFragment : Fragment() {
                 emptyTextView.isVisible = false
                 orderButton.isVisible = true
             }
+
+
         })
 
         viewModel.shoppingBagErrorLiveData.observe(viewLifecycleOwner, {

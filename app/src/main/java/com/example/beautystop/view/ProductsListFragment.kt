@@ -142,18 +142,13 @@ class ProductsListFragment : Fragment() {
         val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
 
         val logout = menu.findItem(R.id.logout)
-        val orders = menu.findItem(R.id.ordersFragment)
         logout.setOnMenuItemClickListener {
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(requireActivity(), LoginActivity::class.java))
             requireActivity().finish()
             true
         }
-        orders.setOnMenuItemClickListener {
 
-            findNavController().navigate(R.id.action_productsListFragment_to_ordersFragment)
-            true
-        }
 
         searchView.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {

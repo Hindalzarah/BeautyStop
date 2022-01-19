@@ -19,6 +19,7 @@ class WishlistFragment : Fragment() {
 
     private lateinit var binding: FragmentWishlistBinding
     private lateinit var wishlistAdapter: WishlistAdapter
+    val productsListViewModel: ProductsListViewModel by activityViewModels()
     val wishlistViewModel: WishlistViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +34,7 @@ class WishlistFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observrs()
-        wishlistAdapter = WishlistAdapter(wishlistViewModel)
+        wishlistAdapter = WishlistAdapter(wishlistViewModel,productsListViewModel,requireContext())
         binding.wishlistRecyclerview.adapter = wishlistAdapter
         wishlistViewModel.callWishlist()
 
@@ -47,10 +48,15 @@ class WishlistFragment : Fragment() {
             binding.favoritesProgressBar.animate().alpha(0f)
 
             if (it.isEmpty()) {
-                binding.emptyWishlistTv.isVisible = true
+                binding.emptyWishlistTv.visibility = View.VISIBLE
+
             } else {
-                binding.emptyWishlistTv.isVisible = false
+                binding.emptyWishlistTv.visibility = View.GONE
             }
+
+            productsListViewModel.makeupProductsErrorLiveData.postValue(null)
+
+
         })
 
         wishlistViewModel.wishlistErrorLiveData.observe(viewLifecycleOwner, Observer {
@@ -58,5 +64,8 @@ class WishlistFragment : Fragment() {
                 Toast.makeText(requireActivity(), "$it wish", Toast.LENGTH_SHORT).show()
             }
         })
+
+
+
     }
 }

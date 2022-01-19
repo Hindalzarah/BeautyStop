@@ -39,7 +39,7 @@ class ShoppingBagViewModel: ViewModel() {
 
                     response.body()?.run {
                         //submitting the response in the livedata
-                        shoppingBagLiveData.postValue(this)
+                        shoppingBagLiveData.postValue(this.distinctBy { it.name })
                         Log.d(TAG,this.toString())
                     }
                 } else {

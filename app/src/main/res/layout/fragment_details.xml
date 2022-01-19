@@ -25,21 +25,10 @@
 <!--            android:layout_marginTop="20dp"-->
 <!--            style="?android:attr/listSeparatorTextViewStyle"/>-->
 
-        <TextView
-            android:id="@+id/brand"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:fontFamily="casual"
-            android:gravity="center"
-            android:text="In Your Element Lipstick - Wind"
-            android:textColor="@color/black"
-            android:textSize="26sp" />
-
         <androidx.cardview.widget.CardView
             android:id="@+id/view2"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
@@ -53,139 +42,143 @@
 
             <ImageView
                 android:id="@+id/productDetailsImageview"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
+                android:layout_width="190dp"
+                android:layout_height="190dp"
 
                 tools:srcCompat="@drawable/palette" />
         </androidx.cardview.widget.CardView>
 
-        <ToggleButton
+        <TextView
+            android:id="@+id/brand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="center"
+            android:text="In Your Element Lipstick - Wind"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <ImageButton
             android:id="@+id/favorite_toggle_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            style="@android:style/Widget.DeviceDefault.ImageButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/add_towishlist"
-            android:textOff=" "
-            android:textOn=" "
+            android:background="?selectableItemBackgroundBorderless"
+            android:scaleType="fitXY"
+            android:src="@drawable/wishlist_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/product_details_imageview" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal">
+            android:layout_marginBottom="5dp"
+            android:text="Product Description"
+            android:textColor="@color/black" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/product_name_textview"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-                style="@style/details_texts"
-
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-                android:layout_margin="10dp"
-                android:layout_marginRight="10dp"
-                android:text="@string/brand" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:text="TextView"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </LinearLayout>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/product_name_textview"
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal"/>
+                        style="@style/details_texts"
 
-        <View
-            android:id="@+id/divider5"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal">
+                        android:layout_margin="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="@string/brand" />
 
-            <TextView
-                android:id="@+id/product_price_textview"
-                style="@style/details_texts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:text="@string/price" />
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:text="TextView"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:text="TextView"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal">
 
-        <View
-            android:id="@+id/divider7"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
+                    <TextView
+                        android:id="@+id/product_price_textview"
+                        style="@style/details_texts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:text="@string/price" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal"/>
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:text="TextView"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
 
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/product_website_link"
+                        style="@style/details_texts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_marginRight="50dp"
+                        android:text="@string/buy_from_website" />
 
-            <TextView
-                android:id="@+id/product_website_link"
-                style="@style/details_texts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginRight="50dp"
-                android:text="@string/buy_from_website" />
+                    <ImageButton
+                        android:id="@+id/website"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="#03FFFFFF"
+                        android:src="@drawable/ic_baseline_link_24"
+                        android:text="TextView" />
 
-            <ImageButton
-                android:id="@+id/website"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="#03FFFFFF"
-                android:src="@drawable/ic_baseline_link_24"
-                android:text="TextView" />
+                </LinearLayout>
 
-        </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -234,19 +227,6 @@
             android:background="@drawable/button_shape"
             android:text="@string/add_to_cart_button"
             android:textColor="@color/black" />
-
-        <View
-            android:id="@+id/divider2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal"/>
 
     </LinearLayout>
 

@@ -90,7 +90,8 @@ class ProductsListViewModel : ViewModel() {
                     wishlistBody.name!!,
                     1,
                     "",
-                    userId,wishlistBody.price.toString()))
+                    userId,wishlistBody.price.toString(),
+                    wishlistBody.imageLink,wishlistBody.imageLink,wishlistBody.brand))
                 if (response.isSuccessful) {
 
 
@@ -113,32 +114,21 @@ class ProductsListViewModel : ViewModel() {
     }
 
 
-    fun searchBrand(brand: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val response = apiRepo.searchBrand(brand)
-                if (response.isSuccessful) {
-                    Log.d(TAG, this.toString())
-                } else {
-                    Log.d(TAG, response.message())
-                    makeupProductsErrorLiveData.postValue(response.message())
-                }
-            } catch (e: Exception) {
-
-                Log.d(TAG, e.message.toString())
-                makeupProductsErrorLiveData.postValue(e.message.toString())
-            }
-        }
-    }
 
 
     fun nextPage() {
 
-        var startIndex = currentPage*limit
-        var endIndex = (currentPage+1)*limit
-        for(index in startIndex..endIndex){
-            pagelist.add(allList[index])
-        }
+        var startIndex = currentPage * limit
+        var endIndex = (currentPage + 1) * limit
+
+        try {
+            for (index in startIndex..endIndex) {
+                pagelist.add(allList[index])
+            }
+
+        } catch(e:Exception){
+            //nothing to do here.
+    }
 
     }
 

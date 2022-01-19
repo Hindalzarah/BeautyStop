@@ -89,7 +89,7 @@ class DetailsFragment() : Fragment() {
             Toast.makeText(requireContext(), "product added to your wishlist", Toast.LENGTH_SHORT)
                 .show()
 
-            if (binding.favoriteToggleButton.isChecked) {
+            if (binding.favoriteToggleButton.isPressed) {
                 productViewModel.addToWishlist(makeupModel)
             }
         }

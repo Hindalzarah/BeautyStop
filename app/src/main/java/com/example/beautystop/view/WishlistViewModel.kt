@@ -35,14 +35,14 @@ class WishlistViewModel : ViewModel() {
 
                 //we need the user id to get the wishlist so we get the user id from the firebase
                 val response = apiRepo.getWishlist(FirebaseAuth.getInstance().currentUser!!.uid)
-                //if sucessful
+                //if successful
                 if (response.isSuccessful) {
                     Log.d(TAG, "in if condition")
                     Log.d(TAG, response.toString())
 
                     response.body()?.run {
                         //submitting the response in the livedata
-                        wishlistLiveData.postValue(this)
+                        wishlistLiveData.postValue(this.distinctBy { it.imageLink })
                         Log.d(TAG, this.toString())
                     }
                 } else {
@@ -75,7 +75,7 @@ class WishlistViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     deleteWishlistLiveData.postValue("successful")
                     Log.d(TAG, this.toString())
-
+                    callWishlist()
                 } else {
                     Log.d(TAG, response.message())
                     wishlistErrorLiveData.postValue(response.message())

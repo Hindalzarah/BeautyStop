@@ -68,7 +68,6 @@ class CategoryMainFragment : Fragment() {
 
         val logout = menu.findItem(R.id.logout)
 
-        val orders = menu.findItem(R.id.ordersFragment)
 
         logout.setOnMenuItemClickListener {
 
@@ -80,12 +79,6 @@ class CategoryMainFragment : Fragment() {
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(requireActivity(), LoginActivity::class.java))
             requireActivity().finish()
-            true
-        }
-
-        orders.setOnMenuItemClickListener {
-
-            findNavController().navigate(R.id.action_categoryMainFragment_to_ordersFragment)
             true
         }
 

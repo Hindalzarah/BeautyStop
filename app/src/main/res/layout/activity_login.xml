@@ -17,7 +17,7 @@
         android:layout_marginBottom="40dp"
         android:gravity="center"
         android:text="@string/login"
-        android:textColor="@color/header_textcolor"
+        android:textColor="@color/black"
         android:textSize="60sp" />
 
     <EditText
@@ -45,7 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:background="@drawable/button_shape"
-        android:text="@string/login" />
+        android:text="@string/login"
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/register_textview"

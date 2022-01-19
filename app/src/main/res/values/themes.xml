@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.BeautyStop" parent="Theme.MaterialComponents.Light">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#CCCCCC</item>
-        <item name="colorPrimaryVariant">#CCCCCC</item>
+        <item name="colorPrimary">#DACACA</item>
+        <item name="colorPrimaryVariant">#DACACA</item>
         <item name="colorOnPrimary">#F7F7F7</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

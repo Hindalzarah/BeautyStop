@@ -82,11 +82,13 @@ class RegisterActivity : AppCompatActivity() {
                             "Make sure your password is strong.",
                             Toast.LENGTH_SHORT)
                             .apply { setGravity(Gravity.TOP, 0, 0); show() }
-                } else
+                } else{
+                    binding.emailContainer.helperText = getString(R.string.required)
+                binding.passwordContainer.helperText = getString(R.string.required)
                     Toast.makeText(this,
                         "Make sure you typed your email address correctly.",
                         Toast.LENGTH_SHORT)
-                        .apply { setGravity(Gravity.TOP, 0, 0); show() }
+                        .apply { setGravity(Gravity.TOP, 0, 0); show() } }
             }
         }
     }
@@ -113,7 +115,7 @@ class RegisterActivity : AppCompatActivity() {
             .setTitle("Invalid Form")
             .setMessage(message)
             .setPositiveButton("Okay") { _, _ ->
-                // do nothing
+                // there's nothing to do here
             }.show()
     }
 

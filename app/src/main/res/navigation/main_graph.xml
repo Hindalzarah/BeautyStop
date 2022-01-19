@@ -19,9 +19,6 @@
         <action
             android:id="@+id/action_categoryMainFragment_self"
             app:destination="@id/categoryMainFragment" />
-        <action
-            android:id="@+id/action_categoryMainFragment_to_ordersFragment"
-            app:destination="@id/ordersFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -55,9 +52,6 @@
         <action
             android:id="@+id/action_productsListFragment_to_shoppingCartFragment"
             app:destination="@id/shoppingCartFragment" />
-        <action
-            android:id="@+id/action_productsListFragment_to_ordersFragment"
-            app:destination="@id/ordersFragment" />
     </fragment>
     <fragment
         android:id="@+id/shoppingCartFragment"
@@ -68,23 +62,11 @@
             android:id="@+id/action_shoppingCartFragment_to_orderFragment"
             app:destination="@id/ConfirmationFragment" />
         <action
-            android:id="@+id/action_shoppingCartFragment_to_ordersFragment"
-            app:destination="@id/ordersFragment" />
-        <action
             android:id="@+id/action_shoppingCartFragment_to_orderFragment"
             app:destination="@id/ConfirmationFragment" />
     </fragment>
     <fragment
         android:id="@+id/ConfirmationFragment"
         android:name="com.example.beautystop.view.OrderFragment"
-        android:label="OrderFragment" >
-        <action
-            android:id="@+id/action_ConfirmationFragment_to_ordersFragment"
-            app:destination="@id/ordersFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/ordersFragment"
-        android:name="com.example.beautystop.view.OrdersFragment"
-        android:label="fragment_orders"
-        tools:layout="@layout/fragment_orders" />
+        android:label="OrderFragment" />
 </navigation>

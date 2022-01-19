@@ -33,14 +33,4 @@
         android:textColor="@color/black"
         android:textSize="24sp" />
 
-    <Button
-        android:id="@+id/order_details_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:text="@string/order_details"
-        android:textColor="@color/black"
-        android:textSize="24sp" />
-
 </LinearLayout>

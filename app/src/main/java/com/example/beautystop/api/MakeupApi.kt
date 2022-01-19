@@ -16,11 +16,6 @@ interface MakeupApi {
         @Query("product_type") product_type: String,
     ): Response<List<MakeupModel>>
 
-    //search by specific brand
-    @GET("/api/v1/products.json")
-    suspend fun searchBrand(
-        @Query("brand") brand: String,
-    ): Response<List<MakeupModel>>
 
     //get the products that are in the wishlist
     @GET("/wishlist")
