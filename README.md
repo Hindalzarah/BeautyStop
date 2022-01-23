@@ -71,13 +71,25 @@
 
 
 <hr>
+### Features:
 
-
-### Unsolved problems and diffeclties:
+* Registration
+* Exploring makeup
+* Adding products to the shopping bag and the wishlist
+* Editing the quantity of the product
+* Viewing the product in the brand website
+*Filtering the products based on the price range.
 
 
 ### Favorite Functions:
 
-* pagination function
-* 
+* Pagination function.
+* Using the bundle to show the products baced on the selected category.
+*Price range filtering.
+
+
+### Upcoming features:
+* Best Selleers filtering
+* Product Review
+
 
