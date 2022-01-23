@@ -123,9 +123,11 @@ class ProductsListFragment : Fragment() {
 
                     Log.d(TAG,range.toString())
 
+                //filters the products list based on the selected price range using the price in the model
                 productsListAdapter.submitList( allProducts.filter{
                    try {
                        it.price!!.toFloat() < range.right && it.price!!.toFloat() > range.left
+                       //when it's out of range
                    } catch (e:NullPointerException){
                        true
                    }
@@ -141,6 +143,7 @@ class ProductsListFragment : Fragment() {
         val searchItem = menu.findItem(R.id.app_bar_search)
         val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
 
+        searchView.queryHint = "Search Brand..."
         val logout = menu.findItem(R.id.logout)
         logout.setOnMenuItemClickListener {
             FirebaseAuth.getInstance().signOut()
@@ -156,27 +159,27 @@ class ProductsListFragment : Fragment() {
                 Log.d(TAG, "search")
                 try {
                     productsListAdapter.submitList(
-
+                        //filtering the products list based on the name.
                         allProducts.filter {
-
                             it.name?.lowercase()!!.contains(query!!.lowercase())
-
                         })
 
                     productsListAdapter.submitList(
+                        //filtering the products list based on the brand.
                         allProducts.filter {
                             it.brand?.lowercase()!!.contains(query!!.lowercase())
-                        }
-                    )
+                        })
 
                 } catch (e: Exception) {
-                    Toast.makeText(requireActivity(), "product not found", Toast.LENGTH_SHORT)
+                    //catching the exception when there's no products with such name
+                    Toast.makeText(requireActivity(), "there are no products with this name", Toast.LENGTH_SHORT)
                         .show()
                 }
 
                 return true
             }
 
+            //
             override fun onQueryTextChange(newText: String?): Boolean {
 
                 return true
@@ -219,7 +222,6 @@ class ProductsListFragment : Fragment() {
         /* these two lines fix the paging problem when I click a different category the same items in the
         previous category appear as will as the current category items
          */
-
         productsListViewModel.pagelist = mutableListOf()
         productsListViewModel.allList = listOf()
 

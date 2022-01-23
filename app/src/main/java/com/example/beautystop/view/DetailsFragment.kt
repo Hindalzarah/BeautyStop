@@ -40,6 +40,7 @@ class DetailsFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observers()
 
+        //getting the data that I posted in the selectedItem livedata.
         productViewModel.selectItem.observe(viewLifecycleOwner, Observer { value ->
             Picasso.get().load(value.imageLink).into(binding.productDetailsImageview)
             binding.name.text = value.brand
@@ -59,10 +60,10 @@ class DetailsFragment() : Fragment() {
             }
 
             if (value.price == "0.0") {
-                binding.price.text = "30 USD"
+                binding.price.text = "30$"
             } else {
 
-                binding.price.text = "${value.price} USD"
+                binding.price.text = "${value.price}$"
             }
 
             binding.website.setOnClickListener() {
@@ -108,7 +109,7 @@ class DetailsFragment() : Fragment() {
         detailsViewModel.makeupProductsLiveData.observe(viewLifecycleOwner, {
             it?.let {
 
-//                binding.listProgressBar.animate().alpha(0f)
+
 
                 detailsViewModel.makeupProductsLiveData.postValue(null)
             }

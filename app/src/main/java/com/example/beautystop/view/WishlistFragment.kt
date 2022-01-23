@@ -47,6 +47,7 @@ class WishlistFragment : Fragment() {
 
             binding.favoritesProgressBar.animate().alpha(0f)
 
+            //if the model is empty, a text will appear
             if (it.isEmpty()) {
                 binding.emptyWishlistTv.visibility = View.VISIBLE
 
@@ -55,7 +56,6 @@ class WishlistFragment : Fragment() {
             }
 
             productsListViewModel.makeupProductsErrorLiveData.postValue(null)
-
 
         })
 

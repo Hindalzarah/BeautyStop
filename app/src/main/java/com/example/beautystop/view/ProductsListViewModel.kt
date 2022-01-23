@@ -34,7 +34,7 @@ class ProductsListViewModel : ViewModel() {
     var currentPage = 0
     var limit = 15
     var pages = 0
-//    var counter = 0
+
 
     //for when a specific item is selected to display the details fragment
     val selectItem = MutableLiveData<MakeupModel>()

@@ -23,8 +23,8 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.beautystop.view.DetailsFragment"
-        android:label="details"
-        tools:layout="@layout/fragment_details" >
+        android:label="Product Details"
+        tools:layout="@layout/fragment_details">
         <action
             android:id="@+id/action_detailsFragment_to_shoppingCartFragment"
             app:destination="@id/shoppingCartFragment" />
@@ -44,7 +44,7 @@
     <fragment
         android:id="@+id/productsListFragment"
         android:name="com.example.beautystop.view.ProductsListFragment"
-        android:label="products"
+        android:label="Products"
         tools:layout="@layout/fragment_products_list">
         <action
             android:id="@+id/action_productsListFragment_to_detailsFragment"
@@ -59,14 +59,14 @@
         android:label="Bag"
         tools:layout="@layout/fragment_shopping_bag">
         <action
-            android:id="@+id/action_shoppingCartFragment_to_orderFragment"
+            android:id="@+id/action_shoppingCartFragment_to_ConfirmationFragment"
             app:destination="@id/ConfirmationFragment" />
         <action
-            android:id="@+id/action_shoppingCartFragment_to_orderFragment"
+            android:id="@+id/action_shoppingCartFragment_to_ConfirmationFragment"
             app:destination="@id/ConfirmationFragment" />
     </fragment>
     <fragment
         android:id="@+id/ConfirmationFragment"
         android:name="com.example.beautystop.view.OrderFragment"
-        android:label="OrderFragment" />
+        android:label="Confitmation" />
 </navigation>

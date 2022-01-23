@@ -38,21 +38,26 @@ class ShoppingBagAdapter(
 
     override fun onBindViewHolder(holder: CartHolder, position: Int) {
         val item = list[position]
-
+//setting the values of the views and assigning them to the data from the model "api"
         holder.productName.text = item.name
         holder.productPrice.text = item.price.toString()
-        Glide.with(context).load(item.image).into(holder.productImage)
+//        Glide.with(context).load(item.image).into(holder.productImage)
         Glide.with(context).load(item.image).into(holder.productImage)
         holder.productName.text = item.name
+        //handling the items that has null price that comes from the api
         if (item.price != 0.0) {
             holder.productPrice.text = "${item.price}$"
         } else {
             holder.productPrice.text =  "15$"
         }
         holder.quantity.text = "Quantity: ${item.quantity}"
+
+
         holder.deleteButton.setOnClickListener {
+            //deleting the data from the model.
             list.remove(item)
             notifyDataSetChanged()
+            //http functions that deletes data from the api.
             viewModel.deleteFromShoppingBag(item.id)
         }
     }

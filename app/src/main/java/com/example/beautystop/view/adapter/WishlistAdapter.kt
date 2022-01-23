@@ -75,27 +75,27 @@ class WishlistAdapter(val viewModel: WishlistViewModel,val productsListViewModel
             differ.submitList(wishlist)
         }
 
-        var counter = item.quantity
-        holder.plus.setOnClickListener {
-
-            Log.d(TAG, counter.toString())
-            counter++
-            holder.amount.text = counter.toString()
-            //update function to update the quantity in the list
-            item.quantity = counter
-            viewModel.editFromWishlist(item)
-        }
-
-        holder.minus.setOnClickListener {
-            if (item.quantity > 0) {
-
-                counter--
-                holder.amount.text = counter.toString()
-            }
-            //update function to update the quantity in the list
-            item.quantity = counter
-            viewModel.editFromWishlist(item)
-        }
+//        var counter = item.quantity
+//        holder.plus.setOnClickListener {
+//
+//            Log.d(TAG, counter.toString())
+//            counter++
+//            holder.amount.text = counter.toString()
+//            //update function to update the quantity in the list
+//            item.quantity = counter
+//            viewModel.editFromWishlist(item)
+//        }
+//
+//        holder.minus.setOnClickListener {
+//            if (item.quantity > 0) {
+//
+//                counter--
+//                holder.amount.text = counter.toString()
+//            }
+//            //update function to update the quantity in the list
+//            item.quantity = counter
+//            viewModel.editFromWishlist(item)
+//        }
     }
 
     override fun getItemCount(): Int {
@@ -106,15 +106,15 @@ class WishlistAdapter(val viewModel: WishlistViewModel,val productsListViewModel
         RecyclerView.ViewHolder(binding.root) {
 
         val delete = binding.deleteButton
-        val plus = binding.plusButton
-        val minus = binding.minusButton
-        val amount = binding.amountTextview
+//        val plus = binding.plusButton
+//        val minus = binding.minusButton
+//        val amount = binding.amountTextview
         fun bind(item: WishlistModel,  context: Context) {
 
             //setting values for the views using the model
             Picasso.get().load(item.image).into(binding.favoritesImageview)
             binding.productNameWishlistTv.text = item.name
-            binding.amountTextview.text = item.quantity.toString()
+//            binding.amountTextview.text = item.quantity.toString()
             binding.productBrandWishlistTv.text = item.brand
             binding.productPriceWishlistTv.text = item.price
             if(item.price=="0.0"){

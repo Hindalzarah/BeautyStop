@@ -46,22 +46,28 @@ class ShoppingBagFragment : Fragment() {
         viewModel.callShoppingBag()
         emptyTextView = view.findViewById(R.id.empty_shoppingbag_tv)
         orderButton = view.findViewById(R.id.order_button)
-        orderButton.setOnClickListener {
 
-            if (recyclerView.isNotEmpty()) {
-                findNavController().navigate(R.id.action_shoppingCartFragment_to_orderFragment)
-            } else {
-                Toast.makeText(requireContext(), "your bag is empty :(", Toast.LENGTH_SHORT).show()
-            }
+
+        orderButton.setOnClickListener {
+            //Empties the list when the user clicks on order button
             adapter.list.clear()
+            //Removes all data from the model
             adapter.list.removeAll(model)
             adapter.notifyDataSetChanged()
             model.forEach {
                 viewModel.deleteFromShoppingBag(it.id)
             }
+            /*the user will be able to navigate to confirmation fragment
+            only if there are items in the shopping bag. */
+            if (recyclerView.isNotEmpty()) {
+                findNavController().navigate(R.id.action_shoppingCartFragment_to_ConfirmationFragment)
+            } else {
+                Toast.makeText(requireContext(), "your bag is empty :(", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
+    //the observing the live data that comes from the api
     fun observers() {
         viewModel.shoppingBagLiveData.observe(viewLifecycleOwner, {
 
@@ -71,14 +77,13 @@ class ShoppingBagFragment : Fragment() {
                 // clears data from the livedata
                 viewModel.livedata.postValue(null)
                 adapter.list = it.toMutableList()
-                //adapter = ShoppingBagAdapter(it,viewModel,requireContext())
                 Log.d("ShoppingFragment", it.toString())
-
 
                 adapter.notifyDataSetChanged()
 
             }
-
+            /*if the model is empty, hide the order button and show a text that
+            informs the user to add products to the list */
             if (it.isEmpty()) {
                 emptyTextView.isVisible = true
                 orderButton.isVisible = false
@@ -87,10 +92,9 @@ class ShoppingBagFragment : Fragment() {
                 emptyTextView.isVisible = false
                 orderButton.isVisible = true
             }
-
-
         })
 
+        //observing the error live data
         viewModel.shoppingBagErrorLiveData.observe(viewLifecycleOwner, {
             it?.let {
                 Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()

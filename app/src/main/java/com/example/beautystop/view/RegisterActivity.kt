@@ -158,23 +158,21 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun validPassword(): String? {
-
         val passwordText = binding.passwordEditText.text.toString()
-
-        if (passwordText.length > 8) {
-            return "Password must have at least 8 Characters"
-        }
-        if (!passwordText.matches(".*[a-z].*".toRegex())) {
-            return "Password must contain at least one Lower-Case Character"
-        }
-        if (!passwordText.matches(".*[@#\$%^&+=].*".toRegex())) {
-            return "Password must contain at least one special Character (@#\$%^&+=)"
+        if (passwordText.length < 8) {
+            return "Minimum 8 Character Password"
         }
         if (!passwordText.matches(".*[A-Z].*".toRegex())) {
-            return "Password must contain at least one Upper-Case Character"
+            return "Must Contain 1 Upper-case Character"
         }
+        if (!passwordText.matches(".*[a-z].*".toRegex())) {
+            return "Must Contain 1 Lower-case Character"
+        }
+        if (!passwordText.matches(".*[@#\$%^&+=].*".toRegex())) {
+            return "Must Contain 1 Special Character (@#\$%^&+=)"
+        }
+
         return null
     }
 }

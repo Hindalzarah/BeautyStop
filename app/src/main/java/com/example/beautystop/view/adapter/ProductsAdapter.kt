@@ -62,17 +62,19 @@ class ProductsAdapter(val productViewModel: ProductsListViewModel, val context: 
             Glide.with(context).load(item.imageLink).placeholder(R.drawable.splash)
                 .into(binding.imageView)
 
+            //setting the values of the views and assigning them to the data from the model "api"
             binding.listBrand.text = item.brand
             binding.listName.text = item.name
-            if (item.price == "0.0"){
+            //handling the items that has null price that comes from the api
+            if (item.price == "0.0") {
                 binding.priceTv.text = "15$"
             } else {
                 binding.priceTv.text = "${item.price}$"
             }
 
-
+            /* posting the selected item data in the livedata, navigating to the details fragment when
+            the user clicks on an item */
             binding.imageView.setOnClickListener() {
-
                 productViewModel.selectItem.postValue(item)
                 it.findNavController().navigate(R.id.action_productsListFragment_to_detailsFragment)
 
